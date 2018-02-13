@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1"/>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+ $(document).ready(function(){
+  $("table").dataTable();
+  
+ });
+</script>
+<title>Halaman User</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>User Id</th>
+				<th>Lokasi Id</th>
+				<th>KTP</th>
+				<th>Username</th>
+				<th>E-mail</th>
+				<th>Password</th>
+				<th>Phone</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="x : ${semuaUser}">
+				<td th:text="${x.userId}"> </td>
+				<td th:text="${x.lokasiId}"> </td>
+				<td th:text="${x.userKtp}"> </td>
+				<td th:text="${x.userName}"> </td>
+				<td th:text="${x.userEmail}"> </td>
+				<td th:text="${x.userPassword}"> </td>
+				<td th:text="${x.userPhone}"> </td>
+				<td>
+					<a th:href="@{'/user/detail/' + ${x.userId}}">Detail</a>
+					<a th:href="@{'/user/edit/' + ${x.userId}}">Edit</a>
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
