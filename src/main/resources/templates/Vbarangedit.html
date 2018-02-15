@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>	
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+  $("table").dataTable();
+  $.get("/kategori",function(data){
+		$("#kategoriinput").autocomplete({
+			source:data
+		});
+	});
+  $("#kategoriinput").change(function(){
+	  
+  });
+ });
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="#" th:action="@{/editbarang}" th:object="${objedit}" method="post">
+		<div>
+			<label th:for="${objedit.kategoriId}"> kategori</label>
+			<input type="text" th:field="*{kategoriId.kategoriId}" th:errorclass="fieldError"  id="kategoriinput"/>
+			<p th:if="${#fields.hasErrors('kategoriId')}"  th:errors="*{kategoriId}"> vendorId</p>
+		</div>
+		<div>
+			<label th:for="${objedit.vendorId}"> vendorId</label>
+			<input type="text" th:field="*{vendorId.vendorId}" th:errorclass="fieldError" />
+			<p th:if="${#fields.hasErrors('vendorId')}"  th:errors="*{vendorId}"> vendorId</p>
+		</div>
+		<div>
+			<label th:for="${objedit.sku}"> SKU</label>
+			<input type="text" th:field="*{sku}" th:errorclass="fieldError" />
+			<p th:if="${#fields.hasErrors('sku')}"  th:errors="*{sku}"> SKU</p>
+		</div>
+		<div>
+			<label th:for="${objedit.barangName}"> barangName</label>
+			<input type="text" th:field="*{barangName}" th:errorclass="fieldError" />
+			<p th:if="${#fields.hasErrors('barangName')}"  th:errors="*{barangName}"> barangName</p>
+		</div>
+		<div>
+			<label th:for="${objedit.warna}"> warna</label>
+			<input type="text" th:field="*{warna}" th:errorclass="fieldError" />
+			<p th:if="${#fields.hasErrors('warna')}"  th:errors="*{warna}"> warna</p>
+		</div>
+		<div>
+			<label th:for="${objedit.barangBerat}"> berat</label>
+			<input type="text" th:field="*{barangBerat}" th:errorclass="fieldError" />
+			<p th:if="${#fields.hasErrors('barangBerat')}"  th:errors="*{barangBerat}"> barangBerat</p>
+		</div>
+		<div>
+			<label th:for="${objedit.barangPrice}"> barangPrice</label>
+			<input type="text" th:field="*{barangPrice}" th:errorclass="fieldError" />
+			<p th:if="${#fields.hasErrors('barangPrice')}"  th:errors="*{barangPrice}"> barangPrice</p>
+		</div>
+
+
+		<div>
+			<input type="submit" value="Simpan yahhhhh" />
+			<input type="hidden" th:field="*{barangId}" th:value="*{barangId}" />
+			
+		</div>
+	</form>
+</body>
+</html>

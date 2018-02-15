@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1" />
+<title>Pengaturan</title>
+</head>
+<body>
+	<form action="#" th:action="@{/user/pengaturan}"
+		th:object="${user}" method="post">
+		<div>
+			<label th:for="${user.userName}">Username</label>
+			<input type="text" th:field="*{userName}" th:errorclass="fieldError"/>
+			<p th:if="${#fields.hasErrors('userName')}"
+				th:errors="*{userName}">Username</p>
+		</div>
+		<div>
+			<label th:for="${user.userPassword}">Password</label>
+			<input type="text" th:field="*{userPassword}" th:errorclass="fieldError"/>
+			<p th:if="${#fields.hasErrors('userPassword')}"
+				th:errors="*{userPassword}">Password</p>
+		</div>
+		<div>
+			<label th:for="${user.userKtp}">KTP</label>
+			<input type="text" th:field="*{userKtp}"
+				eh:errorclass="fieldError"/>
+			<p th:if="${#fields.hasErrors('userKtp')}"
+				th:errors="*{userKtp}">KTP</p>
+		</div>
+		<div>
+			<label th:for="${user.userEmail}">E-mail</label>
+			<input type="text" th:field="*{userEmail}" th:errorclass="fieldError"/>
+			<p th:if="${#fields.hasErrors('userEmail')}"
+				th:errors="*{userEmail}">E-mail</p>
+		</div>
+		<div>
+			<label th:for="${user.userPhone}">Telepon</label>
+			<input type="text" th:field="*{userPhone}"
+				eh:errorclass="fieldError"/>
+			<p th:if="${#fields.hasErrors('userPhone')}"
+				th:errors="*{userPhone}">Telepon</p>
+		</div>
+		<div>
+			<input type="submit" value="SIMPAN" />
+			<input type="hidden" th:field="*{userId}" th:value="*{userId}" />
+		</div>
+	</form>
+</body>
+</html>

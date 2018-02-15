@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Kategori.findByKategoriId", query = "SELECT k FROM Kategori k WHERE k.kategoriId = :kategoriId")
     , @NamedQuery(name = "Kategori.findByKategoriName", query = "SELECT k FROM Kategori k WHERE k.kategoriName = :kategoriName")
     , @NamedQuery(name = "Kategori.findByKategoriLevel", query = "SELECT k FROM Kategori k WHERE k.kategoriLevel = :kategoriLevel")
-    , @NamedQuery(name = "Kategori.findByKategoriParentId", query = "SELECT k FROM Kategori k WHERE k.kategoriParentId = :kategoriParentId")})
+    , @NamedQuery(name = "Kategori.findByKategoriParentId", query = "SELECT k FROM Kategori k WHERE k.kategoriParentId = :kategoriParentId")
+    , @NamedQuery(name = "Kategori.findByIsActive", query = "SELECT k FROM Kategori k WHERE k.isActive = :isActive")})
 public class Kategori implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +51,8 @@ public class Kategori implements Serializable {
     private Integer kategoriLevel;
     @Column(name = "KATEGORI_PARENT_ID")
     private Integer kategoriParentId;
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive;
     @OneToMany(mappedBy = "kategoriId", fetch = FetchType.LAZY)
     private List<Barang> barangList;
 
@@ -90,6 +93,14 @@ public class Kategori implements Serializable {
 
     public void setKategoriParentId(Integer kategoriParentId) {
         this.kategoriParentId = kategoriParentId;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     @XmlTransient

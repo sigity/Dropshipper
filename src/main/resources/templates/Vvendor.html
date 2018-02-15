@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>	
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+  $("table").dataTable();
+  $.get("/kategori",function(data){
+		$("#kategoriinput").autocomplete({
+			source:data
+		});
+	});
+  $("#kategoriinput").change(function(){
+	  
+  });
+ });
+</script>
+<title>Halaman Barang Admin</title>
+</head>
+
+<h1>Vendor</h1>
+
+<body>
+<a > <button id="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal">Tambah Vendor</button></a>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Nama Vendor</th>
+				<th>No Tlp Vendor</th>
+				<th>Email Vendor</th>
+				<th>Lokasi Vendor</th>
+
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="x : ${semuaVendor}">
+				<td th:text="${x.vendorName}"> </td>
+				<td th:text="${x.vendorPhone}"> </td>
+				<td th:text="${x.vendorEmail}"> </td>
+				<td th:text="${x.lokasiId.alamat}"> </td>
+				<td>
+					<a th:href="@{'/editvendor/' + ${x.vendorId}}">edit</a>
+
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="#" th:action="@{/vendor}" th:object="${objvendor}" method="post">
+		<div>
+			<label th:for="${objvendor.vendorName}"> name</label>
+			<input type="text" th:field="*{vendorName}" th:errorclass="fieldError" />
+			<p th:if="${#fields.hasErrors('vendorName')}"  th:errors="*{vendorName}"> SKU</p>
+		</div>
+		<div>
+			<label th:for="${objvendor.vendorPhone}"> phone</label>
+			<input type="text" th:field="*{vendorPhone}" th:errorclass="fieldError" />
+			<p th:if="${#fields.hasErrors('vendorPhone')}"  th:errors="*{vendorPhone}"> barangName</p>
+		</div>
+		<div>
+			<label th:for="${objvendor.vendorEmail}">Email</label>
+			<input type="text" th:field="*{vendorEmail}" th:errorclass="fieldError" />
+			<p th:if="${#fields.hasErrors('vendorEmail')}"  th:errors="*{vendorEmail}"> warna</p>
+		</div>
+		<div>
+			<label th:for="${objvendor.lokasiId}"> lokasiId</label>
+			<input type="text" th:field="*{lokasiId.lokasiId}" th:errorclass="fieldError" />
+			<p th:if="${#fields.hasErrors('lokasiId')}"  th:errors="*{lokasiId}"> barangPrice</p>
+		</div>
+
+
+		<div>
+			<input type="submit" value="Simpan yahhhhh" />
+		</div>
+	</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -40,7 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Barang.findByWarna", query = "SELECT b FROM Barang b WHERE b.warna = :warna")
     , @NamedQuery(name = "Barang.findByBarangBerat", query = "SELECT b FROM Barang b WHERE b.barangBerat = :barangBerat")
     , @NamedQuery(name = "Barang.findByBarangPrice", query = "SELECT b FROM Barang b WHERE b.barangPrice = :barangPrice")
-    , @NamedQuery(name = "Barang.findByGambar", query = "SELECT b FROM Barang b WHERE b.gambar = :gambar")})
+    , @NamedQuery(name = "Barang.findByGambar", query = "SELECT b FROM Barang b WHERE b.gambar = :gambar")
+    , @NamedQuery(name = "Barang.findByIsActive", query = "SELECT b FROM Barang b WHERE b.isActive = :isActive")})
 public class Barang implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,6 +70,8 @@ public class Barang implements Serializable {
     @Size(max = 65535)
     @Column(name = "BARANG_KETERANGAN")
     private String barangKeterangan;
+    @Column(name = "IS_ACTIVE")
+    private int isActive;
     @JoinColumn(name = "VENDOR_ID", referencedColumnName = "VENDOR_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Vendor vendorId;
@@ -147,6 +150,14 @@ public class Barang implements Serializable {
 
     public void setBarangKeterangan(String barangKeterangan) {
         this.barangKeterangan = barangKeterangan;
+    }
+
+    public int getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
     }
 
     public Vendor getVendorId() {

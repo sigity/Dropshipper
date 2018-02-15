@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Detailtransaksi.findByDetailId", query = "SELECT d FROM Detailtransaksi d WHERE d.detailId = :detailId")
     , @NamedQuery(name = "Detailtransaksi.findByDetailQty", query = "SELECT d FROM Detailtransaksi d WHERE d.detailQty = :detailQty")
     , @NamedQuery(name = "Detailtransaksi.findByDetailTotal", query = "SELECT d FROM Detailtransaksi d WHERE d.detailTotal = :detailTotal")
-    , @NamedQuery(name = "Detailtransaksi.findByTotalBerat", query = "SELECT d FROM Detailtransaksi d WHERE d.totalBerat = :totalBerat")})
+    , @NamedQuery(name = "Detailtransaksi.findByTotalBerat", query = "SELECT d FROM Detailtransaksi d WHERE d.totalBerat = :totalBerat")
+    , @NamedQuery(name = "Detailtransaksi.findByIsActive", query = "SELECT d FROM Detailtransaksi d WHERE d.isActive = :isActive")})
 public class Detailtransaksi implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +51,8 @@ public class Detailtransaksi implements Serializable {
     private Integer detailTotal;
     @Column(name = "TOTAL_BERAT")
     private Integer totalBerat;
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive;
     @OneToMany(mappedBy = "detailId", fetch = FetchType.LAZY)
     private List<Pengambilan> pengambilanList;
     @JoinColumn(name = "BARANG_ID", referencedColumnName = "BARANG_ID")
@@ -96,6 +99,14 @@ public class Detailtransaksi implements Serializable {
 
     public void setTotalBerat(Integer totalBerat) {
         this.totalBerat = totalBerat;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     @XmlTransient

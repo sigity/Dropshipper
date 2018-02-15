@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Kurir.findAll", query = "SELECT k FROM Kurir k")
     , @NamedQuery(name = "Kurir.findByKurirId", query = "SELECT k FROM Kurir k WHERE k.kurirId = :kurirId")
-    , @NamedQuery(name = "Kurir.findByKurirName", query = "SELECT k FROM Kurir k WHERE k.kurirName = :kurirName")})
+    , @NamedQuery(name = "Kurir.findByKurirName", query = "SELECT k FROM Kurir k WHERE k.kurirName = :kurirName")
+    , @NamedQuery(name = "Kurir.findByIsActive", query = "SELECT k FROM Kurir k WHERE k.isActive = :isActive")})
 public class Kurir implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,6 +45,8 @@ public class Kurir implements Serializable {
     @Size(max = 25)
     @Column(name = "KURIR_NAME")
     private String kurirName;
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive;
     @OneToMany(mappedBy = "kurirId", fetch = FetchType.LAZY)
     private List<Pengambilan> pengambilanList;
 
@@ -68,6 +71,14 @@ public class Kurir implements Serializable {
 
     public void setKurirName(String kurirName) {
         this.kurirName = kurirName;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     @XmlTransient

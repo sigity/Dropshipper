@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Wilayah.findAll", query = "SELECT w FROM Wilayah w")
     , @NamedQuery(name = "Wilayah.findByWilayahId", query = "SELECT w FROM Wilayah w WHERE w.wilayahId = :wilayahId")
     , @NamedQuery(name = "Wilayah.findByWilayahName", query = "SELECT w FROM Wilayah w WHERE w.wilayahName = :wilayahName")
-    , @NamedQuery(name = "Wilayah.findByLevel", query = "SELECT w FROM Wilayah w WHERE w.level = :level")})
+    , @NamedQuery(name = "Wilayah.findByLevel", query = "SELECT w FROM Wilayah w WHERE w.level = :level")
+    , @NamedQuery(name = "Wilayah.findByIsActive", query = "SELECT w FROM Wilayah w WHERE w.isActive = :isActive")})
 public class Wilayah implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +50,8 @@ public class Wilayah implements Serializable {
     private String wilayahName;
     @Column(name = "LEVEL")
     private Integer level;
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive;
     @OneToMany(mappedBy = "parentId", fetch = FetchType.LAZY)
     private List<Wilayah> wilayahList;
     @JoinColumn(name = "PARENT_ID", referencedColumnName = "WILAYAH_ID")
@@ -86,6 +89,14 @@ public class Wilayah implements Serializable {
 
     public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     @XmlTransient

@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Lokasi.findAll", query = "SELECT l FROM Lokasi l")
     , @NamedQuery(name = "Lokasi.findByLokasiId", query = "SELECT l FROM Lokasi l WHERE l.lokasiId = :lokasiId")
     , @NamedQuery(name = "Lokasi.findByKodepos", query = "SELECT l FROM Lokasi l WHERE l.kodepos = :kodepos")
-    , @NamedQuery(name = "Lokasi.findByAlamat", query = "SELECT l FROM Lokasi l WHERE l.alamat = :alamat")})
+    , @NamedQuery(name = "Lokasi.findByAlamat", query = "SELECT l FROM Lokasi l WHERE l.alamat = :alamat")
+    , @NamedQuery(name = "Lokasi.findByIsActive", query = "SELECT l FROM Lokasi l WHERE l.isActive = :isActive")})
 public class Lokasi implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,11 +45,14 @@ public class Lokasi implements Serializable {
     @Basic(optional = false)
     @Column(name = "LOKASI_ID")
     private Integer lokasiId;
+    @Size(max = 6)
     @Column(name = "KODEPOS")
-    private Long kodepos;
+    private String kodepos;
     @Size(max = 50)
     @Column(name = "ALAMAT")
     private String alamat;
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive;
     @JoinColumn(name = "WILAYAH_ID", referencedColumnName = "WILAYAH_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Wilayah wilayahId;
@@ -72,11 +76,11 @@ public class Lokasi implements Serializable {
         this.lokasiId = lokasiId;
     }
 
-    public Long getKodepos() {
+    public String getKodepos() {
         return kodepos;
     }
 
-    public void setKodepos(Long kodepos) {
+    public void setKodepos(String kodepos) {
         this.kodepos = kodepos;
     }
 
@@ -86,6 +90,14 @@ public class Lokasi implements Serializable {
 
     public void setAlamat(String alamat) {
         this.alamat = alamat;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     public Wilayah getWilayahId() {

@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Bank.findAll", query = "SELECT b FROM Bank b")
     , @NamedQuery(name = "Bank.findByBankId", query = "SELECT b FROM Bank b WHERE b.bankId = :bankId")
     , @NamedQuery(name = "Bank.findByBankName", query = "SELECT b FROM Bank b WHERE b.bankName = :bankName")
-    , @NamedQuery(name = "Bank.findByBankTrfcd", query = "SELECT b FROM Bank b WHERE b.bankTrfcd = :bankTrfcd")})
+    , @NamedQuery(name = "Bank.findByBankTrfcd", query = "SELECT b FROM Bank b WHERE b.bankTrfcd = :bankTrfcd")
+    , @NamedQuery(name = "Bank.findByIsActive", query = "SELECT b FROM Bank b WHERE b.isActive = :isActive")})
 public class Bank implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,6 +49,8 @@ public class Bank implements Serializable {
     @Size(max = 10)
     @Column(name = "BANK_TRFCD")
     private String bankTrfcd;
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive;
     @OneToMany(mappedBy = "bankId", fetch = FetchType.LAZY)
     private List<Rekening> rekeningList;
 
@@ -80,6 +83,14 @@ public class Bank implements Serializable {
 
     public void setBankTrfcd(String bankTrfcd) {
         this.bankTrfcd = bankTrfcd;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     @XmlTransient

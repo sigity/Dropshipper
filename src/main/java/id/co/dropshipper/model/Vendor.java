@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Vendor.findByVendorId", query = "SELECT v FROM Vendor v WHERE v.vendorId = :vendorId")
     , @NamedQuery(name = "Vendor.findByVendorName", query = "SELECT v FROM Vendor v WHERE v.vendorName = :vendorName")
     , @NamedQuery(name = "Vendor.findByVendorPhone", query = "SELECT v FROM Vendor v WHERE v.vendorPhone = :vendorPhone")
-    , @NamedQuery(name = "Vendor.findByVendorEmail", query = "SELECT v FROM Vendor v WHERE v.vendorEmail = :vendorEmail")})
+    , @NamedQuery(name = "Vendor.findByVendorEmail", query = "SELECT v FROM Vendor v WHERE v.vendorEmail = :vendorEmail")
+    , @NamedQuery(name = "Vendor.findByIsActive", query = "SELECT v FROM Vendor v WHERE v.isActive = :isActive")})
 public class Vendor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,6 +55,8 @@ public class Vendor implements Serializable {
     @Size(max = 30)
     @Column(name = "VENDOR_EMAIL")
     private String vendorEmail;
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive;
     @OneToMany(mappedBy = "vendorId", fetch = FetchType.LAZY)
     private List<Barang> barangList;
     @JoinColumn(name = "LOKASI_ID", referencedColumnName = "LOKASI_ID")
@@ -97,6 +100,14 @@ public class Vendor implements Serializable {
 
     public void setVendorEmail(String vendorEmail) {
         this.vendorEmail = vendorEmail;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     @XmlTransient

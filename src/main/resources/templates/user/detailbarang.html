@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1" />
+<title>Halaman Detail Barang</title>
+</head>
+<body>
+	<div th:each="y : ${objekBarang}">
+		<div>
+			<label>Nama Barang :</label>
+			<p th:text="${y.barangName}"></p>
+		</div>
+		<div>
+			<label>Kategori :</label>
+			<p th:text="${y.kategoriId.kategoriName}"></p>
+		</div>
+		<div>
+			<label>Vendor :</label>
+			<p th:text="${y.vendorId.vendorName}"></p>
+		</div>
+		<div>
+			<label>SKU :</label>
+			<p th:text="${y.sku}"></p>
+		</div>
+		<div>
+			<label>Warna :</label>
+			<p th:text="${y.warna}"></p>
+		</div>
+		<div>
+			<label>Berat (gram) :</label>
+			<p th:text="${y.barangBerat}"></p>
+		</div>
+		<div>
+			<label>Harga (Rupiah) :</label>
+			<p th:text="${y.barangPrice}"></p>
+		</div>
+		<div>
+			<label>Keterangan Barang :</label>
+			<p th:text="${y.barangKeterangan}"></p>
+		</div>
+		<div>
+			<a th:href="@{/user/barang}"><button>Kembali</button></a> 
+			<a th:href=""><button>Tambak ke Keranjang</button></a>
+		</div>
+	</div>
+</body>
+</html>

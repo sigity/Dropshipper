@@ -13,31 +13,29 @@
 <title>Halaman Barang</title>
 </head>
 <body>
+	<div>
+		<a th:href="@{/user/pengaturan/3}"><button>Pengaturan</button></a>
+		<a th:href="@{/user/index}"><button>Keluar</button></a>
+	</div>
 	<table>
 		<thead>
 			<tr>
-				<th>Kategori Id</th>
 				<th>Vendor Id</th>
 				<th>SKU</th>
 				<th>Nama Barang</th>
-				<th>Warna</th>
-				<th>Berat (gram)</th>
 				<th>Harga (Rupiah)</th>
 				<th>Details</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="x : ${semuaBarang}">
-				<td th:text="${x.kategoriId.kategoriName}"> </td>
-				<td th:text="${x.vendorId.VendorName}"> </td>
+				<td th:text="${x.vendorId.vendorName}"> </td>
 				<td th:text="${x.sku}"> </td>
 				<td th:text="${x.barangName}"> </td>
-				<td th:text="${x.warna}"> </td>
-				<td th:text="${x.barangBerat}"> </td>
 				<td th:text="${x.barangPrice}"> </td>
 				<td>
-					<a th:href="@{'/barang/detail/' + ${x.barangId}}">Detail</a>
-					<a th:href="@{'/pushcoba'}">Pilih</a>
+					<a th:href="@{'/user/detailbarang/' + ${x.barangId}}">Detail</a>
+					<a th:href="@{'/keranjang/' + ${x.sku}}">Pilih</a>
 					
 				</td>
 			</tr>

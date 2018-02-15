@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Transaksi.findAll", query = "SELECT t FROM Transaksi t")
     , @NamedQuery(name = "Transaksi.findByTransaksiId", query = "SELECT t FROM Transaksi t WHERE t.transaksiId = :transaksiId")
     , @NamedQuery(name = "Transaksi.findByTransaksiTgl", query = "SELECT t FROM Transaksi t WHERE t.transaksiTgl = :transaksiTgl")
-    , @NamedQuery(name = "Transaksi.findByBiayaKurir", query = "SELECT t FROM Transaksi t WHERE t.biayaKurir = :biayaKurir")})
+    , @NamedQuery(name = "Transaksi.findByBiayaKurir", query = "SELECT t FROM Transaksi t WHERE t.biayaKurir = :biayaKurir")
+    , @NamedQuery(name = "Transaksi.findByIsActive", query = "SELECT t FROM Transaksi t WHERE t.isActive = :isActive")})
 public class Transaksi implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +51,8 @@ public class Transaksi implements Serializable {
     private Date transaksiTgl;
     @Column(name = "BIAYA_KURIR")
     private Integer biayaKurir;
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive;
     @JoinColumn(name = "WAKTU_ID", referencedColumnName = "WAKTU_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private WaktuPengambilan waktuId;
@@ -88,6 +91,14 @@ public class Transaksi implements Serializable {
 
     public void setBiayaKurir(Integer biayaKurir) {
         this.biayaKurir = biayaKurir;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     public WaktuPengambilan getWaktuId() {
