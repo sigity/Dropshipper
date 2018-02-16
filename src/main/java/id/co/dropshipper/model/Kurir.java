@@ -46,7 +46,7 @@ public class Kurir implements Serializable {
     @Column(name = "KURIR_NAME")
     private String kurirName;
     @Column(name = "IS_ACTIVE")
-    private Boolean isActive;
+    private Integer isActive;
     @OneToMany(mappedBy = "kurirId", fetch = FetchType.LAZY)
     private List<Pengambilan> pengambilanList;
 
@@ -73,11 +73,11 @@ public class Kurir implements Serializable {
         this.kurirName = kurirName;
     }
 
-    public Boolean getIsActive() {
+    public Integer getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(Boolean isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 

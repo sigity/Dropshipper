@@ -56,7 +56,7 @@ public class Vendor implements Serializable {
     @Column(name = "VENDOR_EMAIL")
     private String vendorEmail;
     @Column(name = "IS_ACTIVE")
-    private Boolean isActive;
+    private Integer isActive;
     @OneToMany(mappedBy = "vendorId", fetch = FetchType.LAZY)
     private List<Barang> barangList;
     @JoinColumn(name = "LOKASI_ID", referencedColumnName = "LOKASI_ID")
@@ -102,11 +102,11 @@ public class Vendor implements Serializable {
         this.vendorEmail = vendorEmail;
     }
 
-    public Boolean getIsActive() {
+    public Integer getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(Boolean isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 

@@ -48,7 +48,7 @@ public class WaktuPengambilan implements Serializable {
     @Temporal(TemporalType.TIME)
     private Date waktuPengambilan;
     @Column(name = "IS_ACTIVE")
-    private Boolean isActive;
+    private Integer isActive;
     @OneToMany(mappedBy = "waktuId", fetch = FetchType.LAZY)
     private List<Transaksi> transaksiList;
 
@@ -75,11 +75,11 @@ public class WaktuPengambilan implements Serializable {
         this.waktuPengambilan = waktuPengambilan;
     }
 
-    public Boolean getIsActive() {
+    public Integer getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(Boolean isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 

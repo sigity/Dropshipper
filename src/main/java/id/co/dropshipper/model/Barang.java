@@ -71,7 +71,7 @@ public class Barang implements Serializable {
     @Column(name = "BARANG_KETERANGAN")
     private String barangKeterangan;
     @Column(name = "IS_ACTIVE")
-    private int isActive;
+    private Integer isActive;
     @JoinColumn(name = "VENDOR_ID", referencedColumnName = "VENDOR_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Vendor vendorId;
@@ -152,11 +152,11 @@ public class Barang implements Serializable {
         this.barangKeterangan = barangKeterangan;
     }
 
-    public int getIsActive() {
+    public Integer getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(int isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 

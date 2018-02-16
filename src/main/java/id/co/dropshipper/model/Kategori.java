@@ -52,7 +52,7 @@ public class Kategori implements Serializable {
     @Column(name = "KATEGORI_PARENT_ID")
     private Integer kategoriParentId;
     @Column(name = "IS_ACTIVE")
-    private Boolean isActive;
+    private Integer isActive;
     @OneToMany(mappedBy = "kategoriId", fetch = FetchType.LAZY)
     private List<Barang> barangList;
 
@@ -95,11 +95,11 @@ public class Kategori implements Serializable {
         this.kategoriParentId = kategoriParentId;
     }
 
-    public Boolean getIsActive() {
+    public Integer getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(Boolean isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 

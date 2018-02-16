@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Transaksi.findAll", query = "SELECT t FROM Transaksi t")
     , @NamedQuery(name = "Transaksi.findByTransaksiId", query = "SELECT t FROM Transaksi t WHERE t.transaksiId = :transaksiId")
     , @NamedQuery(name = "Transaksi.findByTransaksiTgl", query = "SELECT t FROM Transaksi t WHERE t.transaksiTgl = :transaksiTgl")
+    , @NamedQuery(name = "Transaksi.findByTglPengambilan", query = "SELECT t FROM Transaksi t WHERE t.tglPengambilan = :tglPengambilan")
     , @NamedQuery(name = "Transaksi.findByBiayaKurir", query = "SELECT t FROM Transaksi t WHERE t.biayaKurir = :biayaKurir")
     , @NamedQuery(name = "Transaksi.findByIsActive", query = "SELECT t FROM Transaksi t WHERE t.isActive = :isActive")})
 public class Transaksi implements Serializable {
@@ -49,10 +50,13 @@ public class Transaksi implements Serializable {
     @Column(name = "TRANSAKSI_TGL")
     @Temporal(TemporalType.TIMESTAMP)
     private Date transaksiTgl;
+    @Column(name = "TGL_PENGAMBILAN")
+    @Temporal(TemporalType.DATE)
+    private Date tglPengambilan;
     @Column(name = "BIAYA_KURIR")
     private Integer biayaKurir;
     @Column(name = "IS_ACTIVE")
-    private Boolean isActive;
+    private Integer isActive;
     @JoinColumn(name = "WAKTU_ID", referencedColumnName = "WAKTU_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private WaktuPengambilan waktuId;
@@ -85,6 +89,14 @@ public class Transaksi implements Serializable {
         this.transaksiTgl = transaksiTgl;
     }
 
+    public Date getTglPengambilan() {
+        return tglPengambilan;
+    }
+
+    public void setTglPengambilan(Date tglPengambilan) {
+        this.tglPengambilan = tglPengambilan;
+    }
+
     public Integer getBiayaKurir() {
         return biayaKurir;
     }
@@ -93,11 +105,11 @@ public class Transaksi implements Serializable {
         this.biayaKurir = biayaKurir;
     }
 
-    public Boolean getIsActive() {
+    public Integer getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(Boolean isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 

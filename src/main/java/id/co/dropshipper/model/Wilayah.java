@@ -51,7 +51,7 @@ public class Wilayah implements Serializable {
     @Column(name = "LEVEL")
     private Integer level;
     @Column(name = "IS_ACTIVE")
-    private Boolean isActive;
+    private Integer isActive;
     @OneToMany(mappedBy = "parentId", fetch = FetchType.LAZY)
     private List<Wilayah> wilayahList;
     @JoinColumn(name = "PARENT_ID", referencedColumnName = "WILAYAH_ID")
@@ -91,11 +91,11 @@ public class Wilayah implements Serializable {
         this.level = level;
     }
 
-    public Boolean getIsActive() {
+    public Integer getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(Boolean isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 

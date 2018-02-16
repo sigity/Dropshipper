@@ -52,7 +52,7 @@ public class Detailtransaksi implements Serializable {
     @Column(name = "TOTAL_BERAT")
     private Integer totalBerat;
     @Column(name = "IS_ACTIVE")
-    private Boolean isActive;
+    private Integer isActive;
     @OneToMany(mappedBy = "detailId", fetch = FetchType.LAZY)
     private List<Pengambilan> pengambilanList;
     @JoinColumn(name = "BARANG_ID", referencedColumnName = "BARANG_ID")
@@ -101,11 +101,11 @@ public class Detailtransaksi implements Serializable {
         this.totalBerat = totalBerat;
     }
 
-    public Boolean getIsActive() {
+    public Integer getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(Boolean isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 

@@ -52,7 +52,7 @@ public class Lokasi implements Serializable {
     @Column(name = "ALAMAT")
     private String alamat;
     @Column(name = "IS_ACTIVE")
-    private Boolean isActive;
+    private Integer isActive;
     @JoinColumn(name = "WILAYAH_ID", referencedColumnName = "WILAYAH_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Wilayah wilayahId;
@@ -92,11 +92,11 @@ public class Lokasi implements Serializable {
         this.alamat = alamat;
     }
 
-    public Boolean getIsActive() {
+    public Integer getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(Boolean isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 

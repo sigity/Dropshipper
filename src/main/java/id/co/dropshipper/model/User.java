@@ -71,7 +71,7 @@ public class User implements Serializable {
     @Column(name = "USER_PHONE")
     private String userPhone;
     @Column(name = "IS_ACTIVE")
-    private Boolean isActive;
+    private Integer isActive;
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     private List<Transaksi> transaksiList;
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
@@ -142,11 +142,11 @@ public class User implements Serializable {
         this.userPhone = userPhone;
     }
 
-    public Boolean getIsActive() {
+    public Integer getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(Boolean isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 

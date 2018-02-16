@@ -50,7 +50,7 @@ public class Bank implements Serializable {
     @Column(name = "BANK_TRFCD")
     private String bankTrfcd;
     @Column(name = "IS_ACTIVE")
-    private Boolean isActive;
+    private Integer isActive;
     @OneToMany(mappedBy = "bankId", fetch = FetchType.LAZY)
     private List<Rekening> rekeningList;
 
@@ -85,11 +85,11 @@ public class Bank implements Serializable {
         this.bankTrfcd = bankTrfcd;
     }
 
-    public Boolean getIsActive() {
+    public Integer getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(Boolean isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 
