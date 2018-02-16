@@ -10,25 +10,24 @@
 //@Configuration
 //@EnableWebSecurity
 //public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//            .authorizeRequests()
-//                .antMatchers("/", "/user/barang").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//            .formLogin()
-//                .loginPage("/login")
-//                .permitAll()
-//                .and()
-//            .logout()
-//                .permitAll();
-//    }
+//	@Autowired
+//	private EntityManagerFactory entityManagerFactory;
 //
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//            .inMemoryAuthentication()
-//                .withUser("user").password("555").roles("USER");
-//    }
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//		http.authorizeRequests().antMatchers("/", "/login", "/user/daftar").permitAll().anyRequest().authenticated()
+//				.and().formLogin().defaultSuccessUrl("/user/barang.html", true).loginPage("/login").permitAll().and()
+//				.logout().permitAll();
+//	}
+//
+//	@Autowired
+//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//		List<User> listUser = entityManagerFactory
+//				.createEntityManager()
+//				.createQuery("from User")
+//				.getResultList();
+//		for (User user : listUser) {
+//			auth.inMemoryAuthentication().withUser(user.getUserName()).password(user.getUserPassword()).roles("USER");
+//		}
+//	}
 //}

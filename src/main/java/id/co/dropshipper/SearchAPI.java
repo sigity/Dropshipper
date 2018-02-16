@@ -1,9 +1,11 @@
 package id.co.dropshipper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,10 +32,10 @@ public class SearchAPI {
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
 	
-	@GetMapping("/keranjang/{sku}")
-	public String setKeranjang(@PathVariable("sku") String sku) {
+	@GetMapping("/tambahkeranjang/{sku}")
+	public void setTambahKeranjang(HttpServletResponse response, @PathVariable("sku") String sku) throws IOException {
 		stringRedisTemplate.opsForList().leftPush("keranjang", sku);
-		return "redirect:/user/barang";
+		response.sendRedirect("/user/barang");
 	}
 	
 	@GetMapping ("/kategori")

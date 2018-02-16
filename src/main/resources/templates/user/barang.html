@@ -5,18 +5,34 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
- $(document).ready(function(){
-  $("table").dataTable();
-  
- });
+ 	$(document).ready(function(){
+  		$("table").dataTable();	
+  		
+ 	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".x").click(function(){
+			if (this.value=="Tambah") {
+				this.value = "Hapus"; 
+			} else {
+				this.value = "Tambah";
+			}
+		});
+	});
+     
 </script>
 <title>Halaman Barang</title>
 </head>
 <body>
+	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 	<div>
 		<a th:href="@{/user/pengaturan/3}"><button>Pengaturan</button></a>
-		<a th:href="@{/user/index}"><button>Keluar</button></a>
+		<form th:action="@{/logout}" method="post">
+            <input type="submit" value="Keluar"/>
+        </form>
 	</div>
+	
 	<table>
 		<thead>
 			<tr>
@@ -34,9 +50,9 @@
 				<td th:text="${x.barangName}"> </td>
 				<td th:text="${x.barangPrice}"> </td>
 				<td>
-					<a th:href="@{'/user/detailbarang/' + ${x.barangId}}">Detail</a>
-					<a th:href="@{'/keranjang/' + ${x.sku}}">Pilih</a>
-					
+					<a th:href="@{'/user/detailbarang/' + ${x.barangId}}"><input type="button" value="Detail" /></a>
+					<a th:href="@{'/tambahkeranjang/' + ${x.sku}}"><input  type="button" value="Masukkan ke keranjang" /></a>
+					<a th:href="@{'/kurangikeranjang/' + ${x.sku}}"><input type="button" value="Hapus dari keranjang" /></a>					
 				</td>
 			</tr>
 		</tbody>
