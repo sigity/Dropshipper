@@ -74,6 +74,7 @@ public class UserController {
 			BindingResult result) {
 		if(!result.hasErrors() && userDAO.editUser(user)) {
 			return "redirect:/user_barang";
+
 		} else {
 			
 			return "U_pengaturan";
