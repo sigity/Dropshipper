@@ -1,5 +1,6 @@
 package id.co.dropshipper.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,61 +16,67 @@ import id.co.dropshipper.dao.UserDAO;
 import id.co.dropshipper.model.User;
 
 @Controller
-@RequestMapping("user")
+//@RequestMapping("user")
 public class UserController {
 
 	@Autowired
 	private UserDAO userDAO;
 	
-	@GetMapping("/index")
+	@GetMapping("/user_index")
 	public String index(Model model) {
 		model.addAttribute("semuaUser", userDAO.getAllUsers());
-		return "user/index";
+		return "U_index";
 	}
 	
-	@GetMapping("/barang")
+	@GetMapping("/user_barang")
 	public String barang(Model model) {
 		model.addAttribute("semuaBarang", userDAO.getAllBarang());
-		return "user/barang";
+		return "U_barang";
 	}
 	
-	@GetMapping("/detailbarang/{barangId}")
+	@GetMapping("/user_barang/{barangName}")
+	public String barangCari(Model model, @PathVariable("barangName") String nama) {
+		model.addAttribute("semuaBarang", userDAO.getAllBarangCari(nama));
+		return "U_barang";
+	}
+	
+	@GetMapping("/user_detailbarang/{barangId}")
 	public String detail(Model model, @PathVariable("barangId") short id) {
 		model.addAttribute("objekBarang", userDAO.getDetailBarang(id));		
-		return "user/detailbarang";
+		return "U_detailbarang";
 	}
 	
-	@GetMapping("/daftar")
+	@GetMapping("/user_daftar")
 	public String addForm(Model model) {
 		model.addAttribute("user", new User());
-		return "user/daftar";
+		return "U_daftar";
 	}
 	
-	@PostMapping("/daftar")
+	@PostMapping("/user_daftar")
 	public String add(@Valid User user,
 			BindingResult result) {
 		if(!result.hasErrors() && userDAO.addUser(user)) {
-			return "redirect:/user/index";
+			return "redirect:/login";
 		} else {
 			
-			return "user/daftar";
+			return "U_daftar";
 		}
 	}
 	
-	@GetMapping("/pengaturan/{userId}")
+	@GetMapping("/user_pengaturan/{userId}")
 	public String pengaturan(Model model, @PathVariable("userId") short id) {
 		model.addAttribute("user", userDAO.getUser(id));		
-		return "user/pengaturan";
+		return "U_pengaturan";
 	}
 	
-	@PostMapping("/pengaturan")
+	@PostMapping("/user_pengaturan")
 	public String pengaturanUser(@Valid User user, 
 			BindingResult result) {
 		if(!result.hasErrors() && userDAO.editUser(user)) {
-			return "redirect:/user/index";
+			return "redirect:/U_index";
 		} else {
 			
-			return "user/pengaturan";
+			return "U_pengaturan";
 		}
 	}
 	

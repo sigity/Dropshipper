@@ -22,8 +22,8 @@
 //
 //	@Override
 //	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers("/", "/login", "/user/daftar", "/awal", "/css/**", "/js/**", "/fonts/**", "/images/**", "/sass/**").permitAll().anyRequest().authenticated()
-//				.and().formLogin().defaultSuccessUrl("/user/barang.html", true).loginPage("/login").permitAll().and()
+//		http.authorizeRequests().antMatchers("/", "/login", "/user_daftar", "/awal", "/css/**", "/js/**", "/fonts/**", "/images/**", "/sass/**").permitAll().anyRequest().authenticated()
+//				.and().formLogin().defaultSuccessUrl("/user_barang", true).loginPage("/login").permitAll().and()
 //				.logout().permitAll();
 //	}
 //

@@ -35,7 +35,7 @@ public class SearchAPI {
 	@GetMapping("/tambahkeranjang/{sku}")
 	public void setTambahKeranjang(HttpServletResponse response, @PathVariable("sku") String sku) throws IOException {
 		stringRedisTemplate.opsForList().leftPush("keranjang", sku);
-		response.sendRedirect("/user/barang");
+		response.sendRedirect("/user_barang");
 	}
 	
 	@GetMapping ("/kategori")
