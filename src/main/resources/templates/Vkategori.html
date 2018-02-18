@@ -82,9 +82,9 @@
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
           <li ><a href="index.html"><i class="fa fa-bullseye"></i> Dashboard</a></li>
-          <li class="active"><a href="/barang"><i class="fa fa-tasks"></i> Barang</a></li>
-          <li><a href="/kategori"><i class="fa fa-globe"></i> Kategori</a></li>
-          <li><a href="/vendor"><i class="fa fa-list-ol"></i> Vendor</a></li>
+          <li ><a href="/barang"><i class="fa fa-tasks"></i> Barang</a></li>
+          <li class="active"><a href="/kategori"><i class="fa fa-globe"></i> Kategori</a></li>
+          <li ><a href="/vendor"><i class="fa fa-list-ol"></i> Vendor</a></li>
           <li><a href="/kurir"><i class="fa fa-font"></i> Kurir</a></li>
           <li><a href="/wilayah"><i class="fa fa-font"></i> Wilayah</a></li>
           <li><a href="/lokasi"><i class="fa fa-list-ol"></i> Lokasi </a></li>
@@ -155,42 +155,23 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="#" th:action="@{/barang}" th:object="${objbarang}" method="post">
+          <form action="#" th:action="@{/kategori}" th:object="${objkategori}" method="post">
             <div>
-              <label th:for="${objbarang.kategoriId}"> kategori</label>
-              <input type="text" th:field="*{kategoriId.kategoriId}" th:errorclass="fieldError" class="form-control"  id="kategoriinput"/>
-              <p th:if="${#fields.hasErrors('kategoriId')}"  th:errors="*{kategoriId}"> vendorId</p>
+              <label th:for="${objkategori.kategoriName}"> kategori</label>
+              <input type="text" th:field="*{kategoriName}" th:errorclass="fieldError" class="form-control"  />
+              <p th:if="${#fields.hasErrors('kategoriName')}"  th:errors="*{kategoriName}"> vendorId</p>
             </div>
             <div>
-              <label th:for="${objbarang.vendorId}"> vendorId</label>
-              <input type="text" th:field="*{vendorId.vendorId}" th:errorclass="fieldError" class="form-control" />
-              <p th:if="${#fields.hasErrors('vendorId')}"  th:errors="*{vendorId}"> vendorId</p>
+              <label th:for="${objkategori.kategoriLevel}"> vendorId</label>
+              <input type="text" th:field="*{kategoriLevel}" th:errorclass="fieldError" class="form-control" />
+              <p th:if="${#fields.hasErrors('kategoriLevel')}"  th:errors="*{kategoriLevel}"> vendorId</p>
             </div>
             <div>
-              <label th:for="${objbarang.sku}"> SKU</label>
-              <input type="text" th:field="*{sku}" th:errorclass="fieldError" class="form-control"/>
-              <p th:if="${#fields.hasErrors('sku')}"  th:errors="*{sku}"> SKU</p>
+              <label th:for="${objkategori.kategoriParentId}"> SKU</label>
+              <input type="text" th:field="*{kategoriParentId}" th:errorclass="fieldError" class="form-control"/>
+              <p th:if="${#fields.hasErrors('kategoriParentId')}"  th:errors="*{kategoriParentId}"> SKU</p>
             </div>
-            <div>
-              <label th:for="${objbarang.barangName}"> barangName</label>
-              <input type="text" th:field="*{barangName}" th:errorclass="fieldError" class="form-control"/>
-              <p th:if="${#fields.hasErrors('barangName')}"  th:errors="*{barangName}"> barangName</p>
-            </div>
-            <div>
-              <label th:for="${objbarang.warna}"> warna</label>
-              <input type="text" th:field="*{warna}" th:errorclass="fieldError" class="form-control"/>
-              <p th:if="${#fields.hasErrors('warna')}"  th:errors="*{warna}"> warna</p>
-            </div>
-            <div>
-              <label th:for="${objbarang.barangBerat}"> berat</label>
-              <input type="text" th:field="*{barangBerat}" th:errorclass="fieldError" class="form-control"/>
-              <p th:if="${#fields.hasErrors('barangBerat')}"  th:errors="*{barangBerat}"> barangBerat</p>
-            </div>
-            <div>
-              <label th:for="${objbarang.barangPrice}"> barangPrice</label>
-              <input type="text" th:field="*{barangPrice}" th:errorclass="fieldError"  class="form-control"/>
-              <p th:if="${#fields.hasErrors('barangPrice')}"  th:errors="*{barangPrice}"> barangPrice</p>
-            </div>
+           
 
 			<div class="modal-footer">
 				<div>
@@ -206,30 +187,23 @@
           <table class="table table-bordered table-hover pull-left">
             <thead>
               <tr>
-                <th>Kategori Id</th>
-                <th>Vendor Id</th>
-                <th>SKU</th>
-                <th>Nama Barang</th>
-                <th>Warna</th>
-                <th>Berat (gram)</th>
-                <th>Harga (Rupiah)</th>
+                <th>Kategori Nama</th>
+                <th>Kategori Level</th>
+                <th>KAtegori PArent</th>
+
                 <th>Details</th>
               </tr>
             </thead>
             <tbody>
-              <tr th:each="x : ${semuaBarang}">
-                <td th:text="${x.kategoriId.kategoriName}"> </td>
-                <td th:text="${x.vendorId.VendorName}"> </td>
-                <td th:text="${x.sku}"> </td>
-                <td th:text="${x.barangName}"> </td>
-                <td th:text="${x.warna}"> </td>
-                <td th:text="${x.barangBerat}"> </td>
-                <td th:text="${x.barangPrice}"> </td>
+              <tr th:each="x : ${semuakategori}">
+                <td th:text="${x.kategoriName}"> </td>
+                <td th:text="${x.kategoriLevel}"> </td>
+                <td th:text="${x.kategoriParentId}"> </td>
                 <td>
-                  <a th:href="@{'/editbarang/' + ${x.barangId}}"><button class="btn btn-warning">edit</button></a>
+                  <a th:href="@{'/editkategori/' + ${x.kategoriId}}"><button class="btn btn-warning">edit</button></a>
                   <button class="delete btn btn-danger">Delete</button>
-                                    <a th:href="@{'/editbarang/' + ${x.barangId}}"><button class="btn btn-warning">delete</button></a>
-				  <input type="hidden" class="cas " th:value="${x.barangId}" />
+                                    <a th:href="@{'/editkategori/' + ${x.kategoriId}}"><button class="btn btn-warning">delete</button></a>
+				  <input type="hidden" class="cas " th:value="${x.kategoriId}" />
 
                 </td>
               </tr>

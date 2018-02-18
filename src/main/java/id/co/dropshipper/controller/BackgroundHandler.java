@@ -15,8 +15,8 @@ public class BackgroundHandler {
 	
 	@GetMapping("/deletebarang")
 	public boolean deleteBarang(@RequestParam("barangId") short barangId) {
-		Barang objbarang = barangDAO.getBarangid(barangId);
-		objbarang.setIsActive(0);
-		return barangDAO.deleteBarang(objbarang);
+		Barang objbarangedit = barangDAO.getBarangid(barangId);
+		objbarangedit.setIsActive(0);
+		return barangDAO.updateBarang(objbarangedit);
 	}
 }

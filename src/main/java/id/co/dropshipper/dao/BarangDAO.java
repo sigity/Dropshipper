@@ -20,7 +20,7 @@ public class BarangDAO {
 	private EntityManagerFactory factory;
 	public List<Barang> getAllBarang(){
 		return factory.createEntityManager()
-				.createQuery("from Barang where isActive=1")
+				.createQuery("from Barang where isActive=1 or isActive = null")
 				.getResultList();
 	}
 	public List<Vendor> getAllVendor(){
@@ -84,6 +84,7 @@ public class BarangDAO {
 			exBarang.setWarna(updatebarang.getWarna());
 			exBarang.setBarangBerat(updatebarang.getBarangBerat());
 			exBarang.setBarangPrice(updatebarang.getBarangPrice());
+			exBarang.setIsActive(updatebarang.getIsActive());
 			transaksi.commit();
 		} catch (Exception e) {
 			transaksi.rollback();
@@ -92,23 +93,4 @@ public class BarangDAO {
 		}
 		return isSuccess;
 	}
-	
-	public boolean deleteBarang(Barang deletebarang) {
-		EntityManager eManager = factory.createEntityManager();
-		EntityTransaction transaksi= null;
-		boolean isSuccess = true;
-		try {
-			transaksi = eManager.getTransaction();
-			transaksi.begin();
-			Barang exBarang= (Barang) eManager.find(Barang.class, deletebarang.getBarangId());
-			exBarang.setIsActive(deletebarang.getIsActive());
-			transaksi.commit();
-		} catch (Exception e) {
-			transaksi.rollback();
-			isSuccess = false;
-			System.out.println(e.getMessage());
-		}
-		return isSuccess;
-	}
-	
 }

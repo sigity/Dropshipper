@@ -35,11 +35,11 @@ public class SearchAPI {
 	@GetMapping("/tambahkeranjang/{sku}")
 	public void setTambahKeranjang(HttpServletResponse response, @PathVariable("sku") String sku) throws IOException {
 		stringRedisTemplate.opsForList().leftPush("keranjang", sku);
-		response.sendRedirect("/user/barang");
+		response.sendRedirect("/user_barang");
 	}
 	
-	@GetMapping ("/kategori")
-	public List<String> getKategori() {
+	@GetMapping ("/kategoriname")
+	public List<String> getKategoriname() {
 		StringBuilder builder ;
 		
 		List<String> hasil = new ArrayList<>();
@@ -52,9 +52,27 @@ public class SearchAPI {
 		
 		for(Kategori kategori: listkategori) {
 			builder = new StringBuilder();
-			builder.append(kategori.getKategoriId()); 
-			builder.append(",");
 			builder.append(kategori.getKategoriName());
+			hasil.add(builder.toString());
+		}
+			
+		return hasil;
+	}
+	@GetMapping ("/kategoriid")
+	public List<String> getKategoriid() {
+		StringBuilder builder ;
+		
+		List<String> hasil = new ArrayList<>();
+		
+		List<Kategori> listkategori = 
+				entityManagerFactory
+				.createEntityManager()
+				.createQuery("from Kategori")
+				.getResultList();
+		
+		for(Kategori kategori: listkategori) {
+			builder = new StringBuilder();
+			builder.append(kategori.getKategoriId());
 			hasil.add(builder.toString());
 		}
 			
