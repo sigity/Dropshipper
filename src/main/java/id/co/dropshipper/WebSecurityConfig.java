@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package id.co.dropshipper;
 
 import javax.persistence.EntityManagerFactory;
