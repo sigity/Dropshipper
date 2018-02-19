@@ -87,7 +87,7 @@ public class UserDAO {
 	}
 	public List<Barang> getAllBarangCari(String nama){
 		return factory.createEntityManager()
-				.createQuery("from Barang where barangName = " + nama)
+				.createQuery("from Barang where barangName like '%" + nama + "%'")
 				.getResultList();
 	}
 	public List<Vendor> getAllVendor(){
