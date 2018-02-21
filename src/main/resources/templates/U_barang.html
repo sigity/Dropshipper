@@ -25,39 +25,59 @@
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" />
 	
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css" />
+	<link rel="stylesheet" href="../css/animate.css" />
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css" />
+	<link rel="stylesheet" href="../css/icomoon.css" />
 	<!-- Themify Icons-->
-	<link rel="stylesheet" href="css/themify-icons.css" />
+	<link rel="stylesheet" href="../css/themify-icons.css" />
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css" />
+	
+	<link rel="stylesheet" href="../css/bootstrap.css" />
 
 	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css" />
+	<link rel="stylesheet" href="../css/magnific-popup.css" />
 
 	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/bootstrap-datepicker.min.css" />
+	<link rel="stylesheet" href="../css/bootstrap-datepicker.min.css" />
 
 	<!-- Owl Carousel  -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css" />
-	<link rel="stylesheet" href="css/owl.theme.default.min.css" />
+	<link rel="stylesheet" href="../css/owl.carousel.min.css" />
+	<link rel="stylesheet" href="../css/owl.theme.default.min.css" />
 
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="../css/style.css" />
 
 	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="../js/modernizr-2.6.2.min.js"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
+	<script src="../js/respond.min.js"></script>
 	<![endif]-->
 	<script type="text/javascript">
 		function myFunction(){
 			var x = document.getElementById("input1");
 		    var currentVal = x.value;
 		    document.getElementById("form1").action = "/user_barang/" + currentVal;
-		}	 
+		}
+		
+		function tambah(){
+			var x = parseInt($("#vjumlah").val());
+		    $("#vjumlah").val(x+1);
+		}
+
+		function kurang(){
+			var x = parseInt($("#vjumlah").val());
+			if (x > 0) {
+				$("#vjumlah").val(x-1);
+			}			    
+		}
+		
+		function modalKeranjang(){
+			var x = document.getElementById("bName").innerHTML;
+			var y = document.getElementById("bPrice").innerHTML;
+			document.getElementById("namaModal").innerHTML = x;
+			document.getElementById("hargaModal").innerHTML = y;
+		}
 	</script>
 	</head>
 	<body>
@@ -120,14 +140,14 @@
 				<div th:each="x : ${semuaBarang}" class="col-lg-4 col-md-4 col-sm-6">
 					<div class="fh5co-card-item">
 						<figure>
-							<img src="images/img_1.jpg" alt="image" class="img-responsive" />
+							<img src="../images/img_1.jpg" alt="image" class="img-responsive" />
 						</figure>
 						<div class="fh5co-text ">
-							<h2 th:text="${x.barangName}"></h2>
-							<p th:text="'Harga : Rp. ' + ${x.barangPrice}"> </p>
+							<h2 id="bName" th:text="${x.barangName}"></h2>
+							<p id="bPrice" th:text="'Harga : Rp. ' + ${x.barangPrice}"> </p>
 							<p th:text="'Vendor : ' + ${x.vendorId.vendorName}"> </p>
 							<a th:href="@{'/user_detailbarang/' + ${x.barangId}}"><span class="btn btn-primary">Detail</span></a>
-							<a th:href="@{'/tambahkeranjang/' + ${x.sku}}"><span class="btn btn-primary">Masukkan keranjang</span></a>
+							<a ><span class="btn btn-primary" onclick="modalKeranjang()" data-toggle="modal" data-target="#modalpilih">Masukkan keranjang</span></a>
 						</div>
 					</div>
 				</div>
@@ -135,7 +155,49 @@
 			</div>
 		</div>
 	</div>
-		
+	<div class="modal fade" id="modalpilih" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="exampleModalLabel">Form Tambah Barang</h4>
+					<button type="button" class="close btn btn-primary" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form action="#">
+				<div class="modal-body" >
+					<div >
+						<figure>
+							<img src="../images/img_1.jpg" alt="image" class="img-responsive show-image" />
+						</figure>
+					</div>
+						<div>
+							<h2 id="namaModal"></h2>
+						</div>
+						<div>
+							<label id="hargaModal"></label>
+						</div>
+						<div>
+							<label>Jumlah</label>
+						</div>
+						<div class="row col-lg-offset-2">
+							
+								<button type="button" id="btambah" class="btn btn-success col-lg-2" onclick="tambah()"> + </button>
+								<input type="number" id="vjumlah" value="0" class="col-lg-4" />
+								<button type="button" id="bkurang" class="btn btn-danger col-lg-2" onclick="kurang()"> - </button>
+							
+						</div>
+				</div>
+				<div class="modal-footer">
+					<div>
+						<button type="button" class="btn btn-info pull-left" data-dismiss="modal" aria-label="Close">Tutup</button>
+						<input type="submit" value="Masukkan keranjang" class="btn btn-info pull-right" th:href="@{'/tambah_keranjang/' + ${x.barangId}}"/>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<div id="gtco-features">
 		<div class="gtco-container">
 			<div class="row">
@@ -201,31 +263,31 @@
 	</div>
 	
 	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
+	<script src="../js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="../js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
 	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="../js/jquery.waypoints.min.js"></script>
 	<!-- Carousel -->
-	<script src="js/owl.carousel.min.js"></script>
+	<script src="../js/owl.carousel.min.js"></script>
 	<!-- countTo -->
-	<script src="js/jquery.countTo.js"></script>
+	<script src="../js/jquery.countTo.js"></script>
 
 	<!-- Stellar Parallax -->
-	<script src="js/jquery.stellar.min.js"></script>
+	<script src="../js/jquery.stellar.min.js"></script>
 
 	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
+	<script src="../js/jquery.magnific-popup.min.js"></script>
+	<script src="../js/magnific-popup-options.js"></script>
 	
 	<!-- Datepicker -->
-	<script src="js/bootstrap-datepicker.min.js"></script>
+	<script src="../js/bootstrap-datepicker.min.js"></script>
 	
 
 	<!-- Main -->
-	<script src="js/main.js"></script>
+	<script src="../js/main.js"></script>
 
 	</body>
 </html>

@@ -87,9 +87,15 @@ public class BarangDAO {
 			exBarang.setIsActive(updatebarang.getIsActive());
 			transaksi.commit();
 		} catch (Exception e) {
-			transaksi.rollback();
-			isSuccess = false;
 			System.out.println(e.getMessage());
+			try{
+				transaksi.rollback();
+			}
+			finally {
+				
+			}
+			isSuccess = false;
+			
 		}
 		return isSuccess;
 	}

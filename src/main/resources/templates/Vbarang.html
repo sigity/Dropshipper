@@ -49,10 +49,11 @@
     $(".delete").click (function(){
 		var idx = $(".delete").index(this);
 		var idCal = $(".cas:eq(" + idx + ")").val();
+		alert(idCal);
 		var url = "/deletebarang";
 		var choice = confirm('Do you really want to delete this record?');
 	    if(choice == true) {
-			$.get(url,{barangId : barangId});
+			$.get(url,{barangId : idCal});
 			location.reload();
 	    } else {
 	    	return false;

@@ -46,6 +46,12 @@ public class UserController {
 		return "U_detailbarang";
 	}
 	
+	@GetMapping("/tambah_keranjang/{barangId}")
+	public Model barangKeranjang(Model model, @PathVariable("barangId") short id) {
+		model.addAttribute("objekBarang", userDAO.getDetailBarang(id));		
+		return model;
+	}
+	
 	@GetMapping("/user_daftar")
 	public String addForm(Model model) {
 		model.addAttribute("user", new User());
