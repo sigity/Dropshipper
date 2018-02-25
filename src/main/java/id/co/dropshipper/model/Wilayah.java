@@ -26,77 +26,77 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author userx
+ * @author Sigit Yudhianto
  */
 @Entity
 @Table(name = "wilayah")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Wilayah.findAll", query = "SELECT w FROM Wilayah w")
-    , @NamedQuery(name = "Wilayah.findByWilayahId", query = "SELECT w FROM Wilayah w WHERE w.wilayahId = :wilayahId")
-    , @NamedQuery(name = "Wilayah.findByWilayahName", query = "SELECT w FROM Wilayah w WHERE w.wilayahName = :wilayahName")
-    , @NamedQuery(name = "Wilayah.findByLevel", query = "SELECT w FROM Wilayah w WHERE w.level = :level")
-    , @NamedQuery(name = "Wilayah.findByIsActive", query = "SELECT w FROM Wilayah w WHERE w.isActive = :isActive")})
+    , @NamedQuery(name = "Wilayah.findByWilayahid", query = "SELECT w FROM Wilayah w WHERE w.wilayahid = :wilayahid")
+    , @NamedQuery(name = "Wilayah.findByWilayahname", query = "SELECT w FROM Wilayah w WHERE w.wilayahname = :wilayahname")
+    , @NamedQuery(name = "Wilayah.findByWilayahlevel", query = "SELECT w FROM Wilayah w WHERE w.wilayahlevel = :wilayahlevel")
+    , @NamedQuery(name = "Wilayah.findByIsactive", query = "SELECT w FROM Wilayah w WHERE w.isactive = :isactive")})
 public class Wilayah implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "WILAYAH_ID")
-    private Integer wilayahId;
-    @Size(max = 20)
-    @Column(name = "WILAYAH_NAME")
-    private String wilayahName;
-    @Column(name = "LEVEL")
-    private Integer level;
-    @Column(name = "IS_ACTIVE")
-    private Integer isActive;
-    @OneToMany(mappedBy = "parentId", fetch = FetchType.LAZY)
+    @Column(name = "WILAYAHID")
+    private Integer wilayahid;
+    @Size(max = 30)
+    @Column(name = "WILAYAHNAME")
+    private String wilayahname;
+    @Column(name = "WILAYAHLEVEL")
+    private Integer wilayahlevel;
+    @Column(name = "ISACTIVE")
+    private Integer isactive;
+    @OneToMany(mappedBy = "wilayahparentid", fetch = FetchType.LAZY)
     private List<Wilayah> wilayahList;
-    @JoinColumn(name = "PARENT_ID", referencedColumnName = "WILAYAH_ID")
+    @JoinColumn(name = "WILAYAHPARENTID", referencedColumnName = "WILAYAHID")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Wilayah parentId;
-    @OneToMany(mappedBy = "wilayahId", fetch = FetchType.LAZY)
+    private Wilayah wilayahparentid;
+    @OneToMany(mappedBy = "wilayahid", fetch = FetchType.LAZY)
     private List<Lokasi> lokasiList;
 
     public Wilayah() {
     }
 
-    public Wilayah(Integer wilayahId) {
-        this.wilayahId = wilayahId;
+    public Wilayah(Integer wilayahid) {
+        this.wilayahid = wilayahid;
     }
 
-    public Integer getWilayahId() {
-        return wilayahId;
+    public Integer getWilayahid() {
+        return wilayahid;
     }
 
-    public void setWilayahId(Integer wilayahId) {
-        this.wilayahId = wilayahId;
+    public void setWilayahid(Integer wilayahid) {
+        this.wilayahid = wilayahid;
     }
 
-    public String getWilayahName() {
-        return wilayahName;
+    public String getWilayahname() {
+        return wilayahname;
     }
 
-    public void setWilayahName(String wilayahName) {
-        this.wilayahName = wilayahName;
+    public void setWilayahname(String wilayahname) {
+        this.wilayahname = wilayahname;
     }
 
-    public Integer getLevel() {
-        return level;
+    public Integer getWilayahlevel() {
+        return wilayahlevel;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setWilayahlevel(Integer wilayahlevel) {
+        this.wilayahlevel = wilayahlevel;
     }
 
-    public Integer getIsActive() {
-        return isActive;
+    public Integer getIsactive() {
+        return isactive;
     }
 
-    public void setIsActive(Integer isActive) {
-        this.isActive = isActive;
+    public void setIsactive(Integer isactive) {
+        this.isactive = isactive;
     }
 
     @XmlTransient
@@ -108,12 +108,12 @@ public class Wilayah implements Serializable {
         this.wilayahList = wilayahList;
     }
 
-    public Wilayah getParentId() {
-        return parentId;
+    public Wilayah getWilayahparentid() {
+        return wilayahparentid;
     }
 
-    public void setParentId(Wilayah parentId) {
-        this.parentId = parentId;
+    public void setWilayahparentid(Wilayah wilayahparentid) {
+        this.wilayahparentid = wilayahparentid;
     }
 
     @XmlTransient
@@ -128,7 +128,7 @@ public class Wilayah implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (wilayahId != null ? wilayahId.hashCode() : 0);
+        hash += (wilayahid != null ? wilayahid.hashCode() : 0);
         return hash;
     }
 
@@ -139,7 +139,7 @@ public class Wilayah implements Serializable {
             return false;
         }
         Wilayah other = (Wilayah) object;
-        if ((this.wilayahId == null && other.wilayahId != null) || (this.wilayahId != null && !this.wilayahId.equals(other.wilayahId))) {
+        if ((this.wilayahid == null && other.wilayahid != null) || (this.wilayahid != null && !this.wilayahid.equals(other.wilayahid))) {
             return false;
         }
         return true;
@@ -147,7 +147,7 @@ public class Wilayah implements Serializable {
 
     @Override
     public String toString() {
-        return "id.co.dropshipper.model.Wilayah[ wilayahId=" + wilayahId + " ]";
+        return "id.co.dropshipper.model.Wilayah[ wilayahid=" + wilayahid + " ]";
     }
     
 }

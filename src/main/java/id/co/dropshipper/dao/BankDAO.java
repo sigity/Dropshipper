@@ -52,9 +52,9 @@ public class BankDAO {
 		try {
 			transaksi = eManager.getTransaction();
 			transaksi.begin();
-			Bank exBank = (Bank) eManager.find(Bank.class, updateBank.getBankId());
-			exBank.setBankName(updateBank.getBankName());
-			exBank.setBankTrfcd(updateBank.getBankTrfcd());
+			Bank exBank = (Bank) eManager.find(Bank.class, updateBank.getBankid());
+			exBank.setBankname(updateBank.getBankname());
+			//exBank.setBankTrfcd(updateBank.getBankTrfcd());
 			
 			transaksi.commit();
 		} catch (Exception e) {

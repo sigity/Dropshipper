@@ -6,7 +6,6 @@
 package id.co.dropshipper.model;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,126 +17,113 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author userx
+ * @author Sigit Yudhianto
  */
 @Entity
 @Table(name = "detailtransaksi")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Detailtransaksi.findAll", query = "SELECT d FROM Detailtransaksi d")
-    , @NamedQuery(name = "Detailtransaksi.findByDetailId", query = "SELECT d FROM Detailtransaksi d WHERE d.detailId = :detailId")
-    , @NamedQuery(name = "Detailtransaksi.findByDetailQty", query = "SELECT d FROM Detailtransaksi d WHERE d.detailQty = :detailQty")
-    , @NamedQuery(name = "Detailtransaksi.findByDetailTotal", query = "SELECT d FROM Detailtransaksi d WHERE d.detailTotal = :detailTotal")
-    , @NamedQuery(name = "Detailtransaksi.findByTotalBerat", query = "SELECT d FROM Detailtransaksi d WHERE d.totalBerat = :totalBerat")
-    , @NamedQuery(name = "Detailtransaksi.findByIsActive", query = "SELECT d FROM Detailtransaksi d WHERE d.isActive = :isActive")})
+    , @NamedQuery(name = "Detailtransaksi.findByDetailid", query = "SELECT d FROM Detailtransaksi d WHERE d.detailid = :detailid")
+    , @NamedQuery(name = "Detailtransaksi.findByDetailqty", query = "SELECT d FROM Detailtransaksi d WHERE d.detailqty = :detailqty")
+    , @NamedQuery(name = "Detailtransaksi.findByDetailtotal", query = "SELECT d FROM Detailtransaksi d WHERE d.detailtotal = :detailtotal")
+    , @NamedQuery(name = "Detailtransaksi.findByTotalberat", query = "SELECT d FROM Detailtransaksi d WHERE d.totalberat = :totalberat")
+    , @NamedQuery(name = "Detailtransaksi.findByIsactive", query = "SELECT d FROM Detailtransaksi d WHERE d.isactive = :isactive")})
 public class Detailtransaksi implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "DETAIL_ID")
-    private Integer detailId;
-    @Column(name = "DETAIL_QTY")
-    private Integer detailQty;
-    @Column(name = "DETAIL_TOTAL")
-    private Integer detailTotal;
-    @Column(name = "TOTAL_BERAT")
-    private Integer totalBerat;
-    @Column(name = "IS_ACTIVE")
-    private Integer isActive;
-    @OneToMany(mappedBy = "detailId", fetch = FetchType.LAZY)
-    private List<Pengambilan> pengambilanList;
-    @JoinColumn(name = "BARANG_ID", referencedColumnName = "BARANG_ID")
+    @Column(name = "DETAILID")
+    private Integer detailid;
+    @Column(name = "DETAILQTY")
+    private Integer detailqty;
+    @Column(name = "DETAILTOTAL")
+    private Integer detailtotal;
+    @Column(name = "TOTALBERAT")
+    private Integer totalberat;
+    @Column(name = "ISACTIVE")
+    private Integer isactive;
+    @JoinColumn(name = "TRANSAKSIID", referencedColumnName = "TRANSAKSIID")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Barang barangId;
-    @JoinColumn(name = "TRANSAKSI_ID", referencedColumnName = "TRANSAKSI_ID")
+    private Transaksi transaksiid;
+    @JoinColumn(name = "BARANGID", referencedColumnName = "BARANGID")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Transaksi transaksiId;
+    private Barang barangid;
 
     public Detailtransaksi() {
     }
 
-    public Detailtransaksi(Integer detailId) {
-        this.detailId = detailId;
+    public Detailtransaksi(Integer detailid) {
+        this.detailid = detailid;
     }
 
-    public Integer getDetailId() {
-        return detailId;
+    public Integer getDetailid() {
+        return detailid;
     }
 
-    public void setDetailId(Integer detailId) {
-        this.detailId = detailId;
+    public void setDetailid(Integer detailid) {
+        this.detailid = detailid;
     }
 
-    public Integer getDetailQty() {
-        return detailQty;
+    public Integer getDetailqty() {
+        return detailqty;
     }
 
-    public void setDetailQty(Integer detailQty) {
-        this.detailQty = detailQty;
+    public void setDetailqty(Integer detailqty) {
+        this.detailqty = detailqty;
     }
 
-    public Integer getDetailTotal() {
-        return detailTotal;
+    public Integer getDetailtotal() {
+        return detailtotal;
     }
 
-    public void setDetailTotal(Integer detailTotal) {
-        this.detailTotal = detailTotal;
+    public void setDetailtotal(Integer detailtotal) {
+        this.detailtotal = detailtotal;
     }
 
-    public Integer getTotalBerat() {
-        return totalBerat;
+    public Integer getTotalberat() {
+        return totalberat;
     }
 
-    public void setTotalBerat(Integer totalBerat) {
-        this.totalBerat = totalBerat;
+    public void setTotalberat(Integer totalberat) {
+        this.totalberat = totalberat;
     }
 
-    public Integer getIsActive() {
-        return isActive;
+    public Integer getIsactive() {
+        return isactive;
     }
 
-    public void setIsActive(Integer isActive) {
-        this.isActive = isActive;
+    public void setIsactive(Integer isactive) {
+        this.isactive = isactive;
     }
 
-    @XmlTransient
-    public List<Pengambilan> getPengambilanList() {
-        return pengambilanList;
+    public Transaksi getTransaksiid() {
+        return transaksiid;
     }
 
-    public void setPengambilanList(List<Pengambilan> pengambilanList) {
-        this.pengambilanList = pengambilanList;
+    public void setTransaksiid(Transaksi transaksiid) {
+        this.transaksiid = transaksiid;
     }
 
-    public Barang getBarangId() {
-        return barangId;
+    public Barang getBarangid() {
+        return barangid;
     }
 
-    public void setBarangId(Barang barangId) {
-        this.barangId = barangId;
-    }
-
-    public Transaksi getTransaksiId() {
-        return transaksiId;
-    }
-
-    public void setTransaksiId(Transaksi transaksiId) {
-        this.transaksiId = transaksiId;
+    public void setBarangid(Barang barangid) {
+        this.barangid = barangid;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (detailId != null ? detailId.hashCode() : 0);
+        hash += (detailid != null ? detailid.hashCode() : 0);
         return hash;
     }
 
@@ -148,7 +134,7 @@ public class Detailtransaksi implements Serializable {
             return false;
         }
         Detailtransaksi other = (Detailtransaksi) object;
-        if ((this.detailId == null && other.detailId != null) || (this.detailId != null && !this.detailId.equals(other.detailId))) {
+        if ((this.detailid == null && other.detailid != null) || (this.detailid != null && !this.detailid.equals(other.detailid))) {
             return false;
         }
         return true;
@@ -156,7 +142,7 @@ public class Detailtransaksi implements Serializable {
 
     @Override
     public String toString() {
-        return "id.co.dropshipper.model.Detailtransaksi[ detailId=" + detailId + " ]";
+        return "id.co.dropshipper.model.Detailtransaksi[ detailid=" + detailid + " ]";
     }
     
 }

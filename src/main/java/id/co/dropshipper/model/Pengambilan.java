@@ -22,64 +22,75 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author userx
+ * @author Sigit Yudhianto
  */
 @Entity
 @Table(name = "pengambilan")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pengambilan.findAll", query = "SELECT p FROM Pengambilan p")
-    , @NamedQuery(name = "Pengambilan.findByPengambilanId", query = "SELECT p FROM Pengambilan p WHERE p.pengambilanId = :pengambilanId")})
+    , @NamedQuery(name = "Pengambilan.findByPengambilanid", query = "SELECT p FROM Pengambilan p WHERE p.pengambilanid = :pengambilanid")
+    , @NamedQuery(name = "Pengambilan.findByIsactive", query = "SELECT p FROM Pengambilan p WHERE p.isactive = :isactive")})
 public class Pengambilan implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "PENGAMBILAN_ID")
-    private Integer pengambilanId;
-    @JoinColumn(name = "DETAIL_ID", referencedColumnName = "DETAIL_ID")
+    @Column(name = "PENGAMBILANID")
+    private Integer pengambilanid;
+    @Column(name = "ISACTIVE")
+    private Integer isactive;
+    @JoinColumn(name = "WAKTUID", referencedColumnName = "WAKTUID")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Detailtransaksi detailId;
-    @JoinColumn(name = "KURIR_ID", referencedColumnName = "KURIR_ID")
+    private Waktupengambilan waktuid;
+    @JoinColumn(name = "KURIRID", referencedColumnName = "KURIRID")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Kurir kurirId;
+    private Kurir kuririd;
 
     public Pengambilan() {
     }
 
-    public Pengambilan(Integer pengambilanId) {
-        this.pengambilanId = pengambilanId;
+    public Pengambilan(Integer pengambilanid) {
+        this.pengambilanid = pengambilanid;
     }
 
-    public Integer getPengambilanId() {
-        return pengambilanId;
+    public Integer getPengambilanid() {
+        return pengambilanid;
     }
 
-    public void setPengambilanId(Integer pengambilanId) {
-        this.pengambilanId = pengambilanId;
+    public void setPengambilanid(Integer pengambilanid) {
+        this.pengambilanid = pengambilanid;
     }
 
-    public Detailtransaksi getDetailId() {
-        return detailId;
+    public Integer getIsactive() {
+        return isactive;
     }
 
-    public void setDetailId(Detailtransaksi detailId) {
-        this.detailId = detailId;
+    public void setIsactive(Integer isactive) {
+        this.isactive = isactive;
     }
 
-    public Kurir getKurirId() {
-        return kurirId;
+    public Waktupengambilan getWaktuid() {
+        return waktuid;
     }
 
-    public void setKurirId(Kurir kurirId) {
-        this.kurirId = kurirId;
+    public void setWaktuid(Waktupengambilan waktuid) {
+        this.waktuid = waktuid;
+    }
+
+    public Kurir getKuririd() {
+        return kuririd;
+    }
+
+    public void setKuririd(Kurir kuririd) {
+        this.kuririd = kuririd;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (pengambilanId != null ? pengambilanId.hashCode() : 0);
+        hash += (pengambilanid != null ? pengambilanid.hashCode() : 0);
         return hash;
     }
 
@@ -90,7 +101,7 @@ public class Pengambilan implements Serializable {
             return false;
         }
         Pengambilan other = (Pengambilan) object;
-        if ((this.pengambilanId == null && other.pengambilanId != null) || (this.pengambilanId != null && !this.pengambilanId.equals(other.pengambilanId))) {
+        if ((this.pengambilanid == null && other.pengambilanid != null) || (this.pengambilanid != null && !this.pengambilanid.equals(other.pengambilanid))) {
             return false;
         }
         return true;
@@ -98,7 +109,7 @@ public class Pengambilan implements Serializable {
 
     @Override
     public String toString() {
-        return "id.co.dropshipper.model.Pengambilan[ pengambilanId=" + pengambilanId + " ]";
+        return "id.co.dropshipper.model.Pengambilan[ pengambilanid=" + pengambilanid + " ]";
     }
     
 }

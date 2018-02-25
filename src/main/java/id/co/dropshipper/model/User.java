@@ -20,134 +20,132 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author userx
+ * @author Sigit Yudhianto
  */
 @Entity
 @Table(name = "user")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
-    , @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId")
-    , @NamedQuery(name = "User.findByUserKtp", query = "SELECT u FROM User u WHERE u.userKtp = :userKtp")
-    , @NamedQuery(name = "User.findByUserName", query = "SELECT u FROM User u WHERE u.userName = :userName")
-    , @NamedQuery(name = "User.findByUserEmail", query = "SELECT u FROM User u WHERE u.userEmail = :userEmail")
-    , @NamedQuery(name = "User.findByUserPassword", query = "SELECT u FROM User u WHERE u.userPassword = :userPassword")
-    , @NamedQuery(name = "User.findByUserPhone", query = "SELECT u FROM User u WHERE u.userPhone = :userPhone")
-    , @NamedQuery(name = "User.findByIsActive", query = "SELECT u FROM User u WHERE u.isActive = :isActive")})
+    , @NamedQuery(name = "User.findByUserid", query = "SELECT u FROM User u WHERE u.userid = :userid")
+    , @NamedQuery(name = "User.findByUserktp", query = "SELECT u FROM User u WHERE u.userktp = :userktp")
+    , @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
+    , @NamedQuery(name = "User.findByNamauser", query = "SELECT u FROM User u WHERE u.namauser = :namauser")
+    , @NamedQuery(name = "User.findByUsermail", query = "SELECT u FROM User u WHERE u.usermail = :usermail")
+    , @NamedQuery(name = "User.findByUserpassword", query = "SELECT u FROM User u WHERE u.userpassword = :userpassword")
+    , @NamedQuery(name = "User.findByUserphone", query = "SELECT u FROM User u WHERE u.userphone = :userphone")
+    , @NamedQuery(name = "User.findByIsactive", query = "SELECT u FROM User u WHERE u.isactive = :isactive")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "USER_ID")
-    private Integer userId;
+    @Column(name = "USERID")
+    private Integer userid;
     @Size(max = 16)
-    @Column(name = "USER_KTP")
-    private String userKtp;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "USER_NAME")
-    private String userName;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "USER_EMAIL")
-    private String userEmail;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "USER_PASSWORD")
-    private String userPassword;
-    @Size(max = 16)
-    @Column(name = "USER_PHONE")
-    private String userPhone;
-    @Column(name = "IS_ACTIVE")
-    private Integer isActive;
-    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
+    @Column(name = "USERKTP")
+    private String userktp;
+    @Size(max = 30)
+    @Column(name = "USERNAME")
+    private String username;
+    @Size(max = 15)
+    @Column(name = "NAMAUSER")
+    private String namauser;
+    @Size(max = 30)
+    @Column(name = "USERMAIL")
+    private String usermail;
+    @Size(max = 20)
+    @Column(name = "USERPASSWORD")
+    private String userpassword;
+    @Size(max = 13)
+    @Column(name = "USERPHONE")
+    private String userphone;
+    @Column(name = "ISACTIVE")
+    private Integer isactive;
+    @OneToMany(mappedBy = "userid", fetch = FetchType.LAZY)
     private List<Transaksi> transaksiList;
-    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "userid", fetch = FetchType.LAZY)
     private List<Rekening> rekeningList;
-    @JoinColumn(name = "LOKASI_ID", referencedColumnName = "LOKASI_ID")
+    @JoinColumn(name = "LOKASIID", referencedColumnName = "LOKASIID")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Lokasi lokasiId;
+    private Lokasi lokasiid;
 
     public User() {
     }
 
-    public User(Integer userId) {
-        this.userId = userId;
+    public User(Integer userid) {
+        this.userid = userid;
     }
 
-    public User(Integer userId, String userName, String userEmail, String userPassword) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userEmail = userEmail;
-        this.userPassword = userPassword;
+    public Integer getUserid() {
+        return userid;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public String getUserktp() {
+        return userktp;
     }
 
-    public String getUserKtp() {
-        return userKtp;
+    public void setUserktp(String userktp) {
+        this.userktp = userktp;
     }
 
-    public void setUserKtp(String userKtp) {
-        this.userKtp = userKtp;
+    public String getUsername() {
+        return username;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getNamauser() {
+        return namauser;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public void setNamauser(String namauser) {
+        this.namauser = namauser;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public String getUsermail() {
+        return usermail;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public void setUsermail(String usermail) {
+        this.usermail = usermail;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public String getUserpassword() {
+        return userpassword;
     }
 
-    public String getUserPhone() {
-        return userPhone;
+    public void setUserpassword(String userpassword) {
+        this.userpassword = userpassword;
     }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+    public String getUserphone() {
+        return userphone;
     }
 
-    public Integer getIsActive() {
-        return isActive;
+    public void setUserphone(String userphone) {
+        this.userphone = userphone;
     }
 
-    public void setIsActive(Integer isActive) {
-        this.isActive = isActive;
+    public Integer getIsactive() {
+        return isactive;
+    }
+
+    public void setIsactive(Integer isactive) {
+        this.isactive = isactive;
     }
 
     @XmlTransient
@@ -168,18 +166,18 @@ public class User implements Serializable {
         this.rekeningList = rekeningList;
     }
 
-    public Lokasi getLokasiId() {
-        return lokasiId;
+    public Lokasi getLokasiid() {
+        return lokasiid;
     }
 
-    public void setLokasiId(Lokasi lokasiId) {
-        this.lokasiId = lokasiId;
+    public void setLokasiid(Lokasi lokasiid) {
+        this.lokasiid = lokasiid;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (userId != null ? userId.hashCode() : 0);
+        hash += (userid != null ? userid.hashCode() : 0);
         return hash;
     }
 
@@ -190,7 +188,7 @@ public class User implements Serializable {
             return false;
         }
         User other = (User) object;
-        if ((this.userId == null && other.userId != null) || (this.userId != null && !this.userId.equals(other.userId))) {
+        if ((this.userid == null && other.userid != null) || (this.userid != null && !this.userid.equals(other.userid))) {
             return false;
         }
         return true;
@@ -198,7 +196,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "id.co.dropshipper.model.User[ userId=" + userId + " ]";
+        return "id.co.dropshipper.model.User[ userid=" + userid + " ]";
     }
     
 }

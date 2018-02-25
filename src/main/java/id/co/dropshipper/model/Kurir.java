@@ -24,61 +24,61 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author userx
+ * @author Sigit Yudhianto
  */
 @Entity
 @Table(name = "kurir")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Kurir.findAll", query = "SELECT k FROM Kurir k")
-    , @NamedQuery(name = "Kurir.findByKurirId", query = "SELECT k FROM Kurir k WHERE k.kurirId = :kurirId")
-    , @NamedQuery(name = "Kurir.findByKurirName", query = "SELECT k FROM Kurir k WHERE k.kurirName = :kurirName")
-    , @NamedQuery(name = "Kurir.findByIsActive", query = "SELECT k FROM Kurir k WHERE k.isActive = :isActive")})
+    , @NamedQuery(name = "Kurir.findByKuririd", query = "SELECT k FROM Kurir k WHERE k.kuririd = :kuririd")
+    , @NamedQuery(name = "Kurir.findByKurirname", query = "SELECT k FROM Kurir k WHERE k.kurirname = :kurirname")
+    , @NamedQuery(name = "Kurir.findByIsactive", query = "SELECT k FROM Kurir k WHERE k.isactive = :isactive")})
 public class Kurir implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "KURIR_ID")
-    private Integer kurirId;
-    @Size(max = 25)
-    @Column(name = "KURIR_NAME")
-    private String kurirName;
-    @Column(name = "IS_ACTIVE")
-    private Integer isActive;
-    @OneToMany(mappedBy = "kurirId", fetch = FetchType.LAZY)
+    @Column(name = "KURIRID")
+    private Integer kuririd;
+    @Size(max = 30)
+    @Column(name = "KURIRNAME")
+    private String kurirname;
+    @Column(name = "ISACTIVE")
+    private Integer isactive;
+    @OneToMany(mappedBy = "kuririd", fetch = FetchType.LAZY)
     private List<Pengambilan> pengambilanList;
 
     public Kurir() {
     }
 
-    public Kurir(Integer kurirId) {
-        this.kurirId = kurirId;
+    public Kurir(Integer kuririd) {
+        this.kuririd = kuririd;
     }
 
-    public Integer getKurirId() {
-        return kurirId;
+    public Integer getKuririd() {
+        return kuririd;
     }
 
-    public void setKurirId(Integer kurirId) {
-        this.kurirId = kurirId;
+    public void setKuririd(Integer kuririd) {
+        this.kuririd = kuririd;
     }
 
-    public String getKurirName() {
-        return kurirName;
+    public String getKurirname() {
+        return kurirname;
     }
 
-    public void setKurirName(String kurirName) {
-        this.kurirName = kurirName;
+    public void setKurirname(String kurirname) {
+        this.kurirname = kurirname;
     }
 
-    public Integer getIsActive() {
-        return isActive;
+    public Integer getIsactive() {
+        return isactive;
     }
 
-    public void setIsActive(Integer isActive) {
-        this.isActive = isActive;
+    public void setIsactive(Integer isactive) {
+        this.isactive = isactive;
     }
 
     @XmlTransient
@@ -93,7 +93,7 @@ public class Kurir implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (kurirId != null ? kurirId.hashCode() : 0);
+        hash += (kuririd != null ? kuririd.hashCode() : 0);
         return hash;
     }
 
@@ -104,7 +104,7 @@ public class Kurir implements Serializable {
             return false;
         }
         Kurir other = (Kurir) object;
-        if ((this.kurirId == null && other.kurirId != null) || (this.kurirId != null && !this.kurirId.equals(other.kurirId))) {
+        if ((this.kuririd == null && other.kuririd != null) || (this.kuririd != null && !this.kuririd.equals(other.kuririd))) {
             return false;
         }
         return true;
@@ -112,7 +112,7 @@ public class Kurir implements Serializable {
 
     @Override
     public String toString() {
-        return "id.co.dropshipper.model.Kurir[ kurirId=" + kurirId + " ]";
+        return "id.co.dropshipper.model.Kurir[ kuririd=" + kuririd + " ]";
     }
     
 }

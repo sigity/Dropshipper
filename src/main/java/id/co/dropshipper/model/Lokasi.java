@@ -26,86 +26,85 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author userx
+ * @author Sigit Yudhianto
  */
 @Entity
 @Table(name = "lokasi")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Lokasi.findAll", query = "SELECT l FROM Lokasi l")
-    , @NamedQuery(name = "Lokasi.findByLokasiId", query = "SELECT l FROM Lokasi l WHERE l.lokasiId = :lokasiId")
+    , @NamedQuery(name = "Lokasi.findByLokasiid", query = "SELECT l FROM Lokasi l WHERE l.lokasiid = :lokasiid")
+    , @NamedQuery(name = "Lokasi.findByAlamatlengkap", query = "SELECT l FROM Lokasi l WHERE l.alamatlengkap = :alamatlengkap")
     , @NamedQuery(name = "Lokasi.findByKodepos", query = "SELECT l FROM Lokasi l WHERE l.kodepos = :kodepos")
-    , @NamedQuery(name = "Lokasi.findByAlamat", query = "SELECT l FROM Lokasi l WHERE l.alamat = :alamat")
-    , @NamedQuery(name = "Lokasi.findByIsActive", query = "SELECT l FROM Lokasi l WHERE l.isActive = :isActive")})
+    , @NamedQuery(name = "Lokasi.findByIsactive", query = "SELECT l FROM Lokasi l WHERE l.isactive = :isactive")})
 public class Lokasi implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "LOKASI_ID")
-    private Integer lokasiId;
-    @Size(max = 6)
+    @Column(name = "LOKASIID")
+    private Integer lokasiid;
+    @Size(max = 30)
+    @Column(name = "ALAMATLENGKAP")
+    private String alamatlengkap;
     @Column(name = "KODEPOS")
-    private String kodepos;
-    @Size(max = 50)
-    @Column(name = "ALAMAT")
-    private String alamat;
-    @Column(name = "IS_ACTIVE")
-    private Integer isActive;
-    @JoinColumn(name = "WILAYAH_ID", referencedColumnName = "WILAYAH_ID")
+    private Integer kodepos;
+    @Column(name = "ISACTIVE")
+    private Integer isactive;
+    @JoinColumn(name = "WILAYAHID", referencedColumnName = "WILAYAHID")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Wilayah wilayahId;
-    @OneToMany(mappedBy = "lokasiId", fetch = FetchType.LAZY)
+    private Wilayah wilayahid;
+    @OneToMany(mappedBy = "lokasiid", fetch = FetchType.LAZY)
     private List<Vendor> vendorList;
-    @OneToMany(mappedBy = "lokasiId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "lokasiid", fetch = FetchType.LAZY)
     private List<User> userList;
 
     public Lokasi() {
     }
 
-    public Lokasi(Integer lokasiId) {
-        this.lokasiId = lokasiId;
+    public Lokasi(Integer lokasiid) {
+        this.lokasiid = lokasiid;
     }
 
-    public Integer getLokasiId() {
-        return lokasiId;
+    public Integer getLokasiid() {
+        return lokasiid;
     }
 
-    public void setLokasiId(Integer lokasiId) {
-        this.lokasiId = lokasiId;
+    public void setLokasiid(Integer lokasiid) {
+        this.lokasiid = lokasiid;
     }
 
-    public String getKodepos() {
+    public String getAlamatlengkap() {
+        return alamatlengkap;
+    }
+
+    public void setAlamatlengkap(String alamatlengkap) {
+        this.alamatlengkap = alamatlengkap;
+    }
+
+    public Integer getKodepos() {
         return kodepos;
     }
 
-    public void setKodepos(String kodepos) {
+    public void setKodepos(Integer kodepos) {
         this.kodepos = kodepos;
     }
 
-    public String getAlamat() {
-        return alamat;
+    public Integer getIsactive() {
+        return isactive;
     }
 
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
+    public void setIsactive(Integer isactive) {
+        this.isactive = isactive;
     }
 
-    public Integer getIsActive() {
-        return isActive;
+    public Wilayah getWilayahid() {
+        return wilayahid;
     }
 
-    public void setIsActive(Integer isActive) {
-        this.isActive = isActive;
-    }
-
-    public Wilayah getWilayahId() {
-        return wilayahId;
-    }
-
-    public void setWilayahId(Wilayah wilayahId) {
-        this.wilayahId = wilayahId;
+    public void setWilayahid(Wilayah wilayahid) {
+        this.wilayahid = wilayahid;
     }
 
     @XmlTransient
@@ -129,7 +128,7 @@ public class Lokasi implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (lokasiId != null ? lokasiId.hashCode() : 0);
+        hash += (lokasiid != null ? lokasiid.hashCode() : 0);
         return hash;
     }
 
@@ -140,7 +139,7 @@ public class Lokasi implements Serializable {
             return false;
         }
         Lokasi other = (Lokasi) object;
-        if ((this.lokasiId == null && other.lokasiId != null) || (this.lokasiId != null && !this.lokasiId.equals(other.lokasiId))) {
+        if ((this.lokasiid == null && other.lokasiid != null) || (this.lokasiid != null && !this.lokasiid.equals(other.lokasiid))) {
             return false;
         }
         return true;
@@ -148,7 +147,7 @@ public class Lokasi implements Serializable {
 
     @Override
     public String toString() {
-        return "id.co.dropshipper.model.Lokasi[ lokasiId=" + lokasiId + " ]";
+        return "id.co.dropshipper.model.Lokasi[ lokasiid=" + lokasiid + " ]";
     }
     
 }

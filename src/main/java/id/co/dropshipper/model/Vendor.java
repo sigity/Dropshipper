@@ -26,88 +26,88 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author userx
+ * @author Sigit Yudhianto
  */
 @Entity
 @Table(name = "vendor")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Vendor.findAll", query = "SELECT v FROM Vendor v")
-    , @NamedQuery(name = "Vendor.findByVendorId", query = "SELECT v FROM Vendor v WHERE v.vendorId = :vendorId")
-    , @NamedQuery(name = "Vendor.findByVendorName", query = "SELECT v FROM Vendor v WHERE v.vendorName = :vendorName")
-    , @NamedQuery(name = "Vendor.findByVendorPhone", query = "SELECT v FROM Vendor v WHERE v.vendorPhone = :vendorPhone")
-    , @NamedQuery(name = "Vendor.findByVendorEmail", query = "SELECT v FROM Vendor v WHERE v.vendorEmail = :vendorEmail")
-    , @NamedQuery(name = "Vendor.findByIsActive", query = "SELECT v FROM Vendor v WHERE v.isActive = :isActive")})
+    , @NamedQuery(name = "Vendor.findByVendorid", query = "SELECT v FROM Vendor v WHERE v.vendorid = :vendorid")
+    , @NamedQuery(name = "Vendor.findByVendorname", query = "SELECT v FROM Vendor v WHERE v.vendorname = :vendorname")
+    , @NamedQuery(name = "Vendor.findByVendorphone", query = "SELECT v FROM Vendor v WHERE v.vendorphone = :vendorphone")
+    , @NamedQuery(name = "Vendor.findByVendormail", query = "SELECT v FROM Vendor v WHERE v.vendormail = :vendormail")
+    , @NamedQuery(name = "Vendor.findByIsactive", query = "SELECT v FROM Vendor v WHERE v.isactive = :isactive")})
 public class Vendor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "VENDOR_ID")
-    private Integer vendorId;
-    @Size(max = 20)
-    @Column(name = "VENDOR_NAME")
-    private String vendorName;
-    @Size(max = 13)
-    @Column(name = "VENDOR_PHONE")
-    private String vendorPhone;
+    @Column(name = "VENDORID")
+    private Integer vendorid;
     @Size(max = 30)
-    @Column(name = "VENDOR_EMAIL")
-    private String vendorEmail;
-    @Column(name = "IS_ACTIVE")
-    private Integer isActive;
-    @OneToMany(mappedBy = "vendorId", fetch = FetchType.LAZY)
+    @Column(name = "VENDORNAME")
+    private String vendorname;
+    @Size(max = 13)
+    @Column(name = "VENDORPHONE")
+    private String vendorphone;
+    @Size(max = 30)
+    @Column(name = "VENDORMAIL")
+    private String vendormail;
+    @Column(name = "ISACTIVE")
+    private Integer isactive;
+    @OneToMany(mappedBy = "vendorid", fetch = FetchType.LAZY)
     private List<Barang> barangList;
-    @JoinColumn(name = "LOKASI_ID", referencedColumnName = "LOKASI_ID")
+    @JoinColumn(name = "LOKASIID", referencedColumnName = "LOKASIID")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Lokasi lokasiId;
+    private Lokasi lokasiid;
 
     public Vendor() {
     }
 
-    public Vendor(Integer vendorId) {
-        this.vendorId = vendorId;
+    public Vendor(Integer vendorid) {
+        this.vendorid = vendorid;
     }
 
-    public Integer getVendorId() {
-        return vendorId;
+    public Integer getVendorid() {
+        return vendorid;
     }
 
-    public void setVendorId(Integer vendorId) {
-        this.vendorId = vendorId;
+    public void setVendorid(Integer vendorid) {
+        this.vendorid = vendorid;
     }
 
-    public String getVendorName() {
-        return vendorName;
+    public String getVendorname() {
+        return vendorname;
     }
 
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
+    public void setVendorname(String vendorname) {
+        this.vendorname = vendorname;
     }
 
-    public String getVendorPhone() {
-        return vendorPhone;
+    public String getVendorphone() {
+        return vendorphone;
     }
 
-    public void setVendorPhone(String vendorPhone) {
-        this.vendorPhone = vendorPhone;
+    public void setVendorphone(String vendorphone) {
+        this.vendorphone = vendorphone;
     }
 
-    public String getVendorEmail() {
-        return vendorEmail;
+    public String getVendormail() {
+        return vendormail;
     }
 
-    public void setVendorEmail(String vendorEmail) {
-        this.vendorEmail = vendorEmail;
+    public void setVendormail(String vendormail) {
+        this.vendormail = vendormail;
     }
 
-    public Integer getIsActive() {
-        return isActive;
+    public Integer getIsactive() {
+        return isactive;
     }
 
-    public void setIsActive(Integer isActive) {
-        this.isActive = isActive;
+    public void setIsactive(Integer isactive) {
+        this.isactive = isactive;
     }
 
     @XmlTransient
@@ -119,18 +119,18 @@ public class Vendor implements Serializable {
         this.barangList = barangList;
     }
 
-    public Lokasi getLokasiId() {
-        return lokasiId;
+    public Lokasi getLokasiid() {
+        return lokasiid;
     }
 
-    public void setLokasiId(Lokasi lokasiId) {
-        this.lokasiId = lokasiId;
+    public void setLokasiid(Lokasi lokasiid) {
+        this.lokasiid = lokasiid;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (vendorId != null ? vendorId.hashCode() : 0);
+        hash += (vendorid != null ? vendorid.hashCode() : 0);
         return hash;
     }
 
@@ -141,7 +141,7 @@ public class Vendor implements Serializable {
             return false;
         }
         Vendor other = (Vendor) object;
-        if ((this.vendorId == null && other.vendorId != null) || (this.vendorId != null && !this.vendorId.equals(other.vendorId))) {
+        if ((this.vendorid == null && other.vendorid != null) || (this.vendorid != null && !this.vendorid.equals(other.vendorid))) {
             return false;
         }
         return true;
@@ -149,7 +149,7 @@ public class Vendor implements Serializable {
 
     @Override
     public String toString() {
-        return "id.co.dropshipper.model.Vendor[ vendorId=" + vendorId + " ]";
+        return "id.co.dropshipper.model.Vendor[ vendorid=" + vendorid + " ]";
     }
     
 }

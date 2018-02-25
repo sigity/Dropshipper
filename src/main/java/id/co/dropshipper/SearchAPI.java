@@ -3,6 +3,8 @@ package id.co.dropshipper;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,10 +35,27 @@ public class SearchAPI {
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
 	
-	@GetMapping("/tambahkeranjang/{sku}")
-	public void setTambahKeranjang(HttpServletResponse response, @PathVariable("sku") String sku) throws IOException {
-		stringRedisTemplate.opsForList().leftPush("keranjang", sku);
-		response.sendRedirect("/user_barang");
+	@GetMapping("/tambahkeranjang/{nama}/{sku}/{jumlah}")
+	public void setTambahKeranjang(HttpServletResponse response,@PathVariable("nama") String nama, @PathVariable("sku") String sku, @PathVariable("jumlah") String jumlah) throws IOException {
+		//stringRedisTemplate.opsForList().leftPush("keranjang", sku);
+		//stringRedisTemplate.opsForZSet().add("keranjang", sku, 1.00d);
+		//double x = (double) jumlah;
+		//stringRedisTemplate.opsForZSet().incrementScore("keranjang-" + nama, sku, x);
+		stringRedisTemplate.opsForHash().put("keranjang-" + nama, sku, jumlah);
+		response.sendRedirect("/user/barang");
+	}
+	
+	@GetMapping("/munculkan/{nama}/{sku}")
+	public Object getKeranjang(@PathVariable("nama") String nama, @PathVariable("sku") String sku){
+		//return stringRedisTemplate.opsForHash().entries("keranjang2-ani");
+		String key = "keranjang-" + nama;
+		return stringRedisTemplate.opsForHash().get(key, sku);
+	}
+	
+	@GetMapping("/munculkan/{nama}")
+	public Object getKeranjang2(@PathVariable("nama") String nama){
+		String key = "keranjang-" + nama;
+		return stringRedisTemplate.opsForHash().entries(key);
 	}
 	
 	@GetMapping ("/kategoriname")
@@ -52,7 +72,7 @@ public class SearchAPI {
 		
 		for(Kategori kategori: listkategori) {
 			builder = new StringBuilder();
-			builder.append(kategori.getKategoriName());
+			builder.append(kategori.getKategoriname());
 			hasil.add(builder.toString());
 		}
 			
@@ -72,7 +92,7 @@ public class SearchAPI {
 		
 		for(Kategori kategori: listkategori) {
 			builder = new StringBuilder();
-			builder.append(kategori.getKategoriId());
+			builder.append(kategori.getKategoriid());
 			hasil.add(builder.toString());
 		}
 			

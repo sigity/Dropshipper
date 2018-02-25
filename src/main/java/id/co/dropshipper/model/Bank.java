@@ -24,73 +24,61 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author userx
+ * @author Sigit Yudhianto
  */
 @Entity
 @Table(name = "bank")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Bank.findAll", query = "SELECT b FROM Bank b")
-    , @NamedQuery(name = "Bank.findByBankId", query = "SELECT b FROM Bank b WHERE b.bankId = :bankId")
-    , @NamedQuery(name = "Bank.findByBankName", query = "SELECT b FROM Bank b WHERE b.bankName = :bankName")
-    , @NamedQuery(name = "Bank.findByBankTrfcd", query = "SELECT b FROM Bank b WHERE b.bankTrfcd = :bankTrfcd")
-    , @NamedQuery(name = "Bank.findByIsActive", query = "SELECT b FROM Bank b WHERE b.isActive = :isActive")})
+    , @NamedQuery(name = "Bank.findByBankid", query = "SELECT b FROM Bank b WHERE b.bankid = :bankid")
+    , @NamedQuery(name = "Bank.findByBankname", query = "SELECT b FROM Bank b WHERE b.bankname = :bankname")
+    , @NamedQuery(name = "Bank.findByIsactive", query = "SELECT b FROM Bank b WHERE b.isactive = :isactive")})
 public class Bank implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "BANK_ID")
-    private Integer bankId;
+    @Column(name = "BANKID")
+    private Integer bankid;
     @Size(max = 30)
-    @Column(name = "BANK_NAME")
-    private String bankName;
-    @Size(max = 10)
-    @Column(name = "BANK_TRFCD")
-    private String bankTrfcd;
-    @Column(name = "IS_ACTIVE")
-    private Integer isActive;
-    @OneToMany(mappedBy = "bankId", fetch = FetchType.LAZY)
+    @Column(name = "BANKNAME")
+    private String bankname;
+    @Column(name = "ISACTIVE")
+    private Integer isactive;
+    @OneToMany(mappedBy = "bankid", fetch = FetchType.LAZY)
     private List<Rekening> rekeningList;
 
     public Bank() {
     }
 
-    public Bank(Integer bankId) {
-        this.bankId = bankId;
+    public Bank(Integer bankid) {
+        this.bankid = bankid;
     }
 
-    public Integer getBankId() {
-        return bankId;
+    public Integer getBankid() {
+        return bankid;
     }
 
-    public void setBankId(Integer bankId) {
-        this.bankId = bankId;
+    public void setBankid(Integer bankid) {
+        this.bankid = bankid;
     }
 
-    public String getBankName() {
-        return bankName;
+    public String getBankname() {
+        return bankname;
     }
 
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
+    public void setBankname(String bankname) {
+        this.bankname = bankname;
     }
 
-    public String getBankTrfcd() {
-        return bankTrfcd;
+    public Integer getIsactive() {
+        return isactive;
     }
 
-    public void setBankTrfcd(String bankTrfcd) {
-        this.bankTrfcd = bankTrfcd;
-    }
-
-    public Integer getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Integer isActive) {
-        this.isActive = isActive;
+    public void setIsactive(Integer isactive) {
+        this.isactive = isactive;
     }
 
     @XmlTransient
@@ -105,7 +93,7 @@ public class Bank implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (bankId != null ? bankId.hashCode() : 0);
+        hash += (bankid != null ? bankid.hashCode() : 0);
         return hash;
     }
 
@@ -116,7 +104,7 @@ public class Bank implements Serializable {
             return false;
         }
         Bank other = (Bank) object;
-        if ((this.bankId == null && other.bankId != null) || (this.bankId != null && !this.bankId.equals(other.bankId))) {
+        if ((this.bankid == null && other.bankid != null) || (this.bankid != null && !this.bankid.equals(other.bankid))) {
             return false;
         }
         return true;
@@ -124,7 +112,7 @@ public class Bank implements Serializable {
 
     @Override
     public String toString() {
-        return "id.co.dropshipper.model.Bank[ bankId=" + bankId + " ]";
+        return "id.co.dropshipper.model.Bank[ bankid=" + bankid + " ]";
     }
     
 }

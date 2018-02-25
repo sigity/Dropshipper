@@ -50,10 +50,10 @@ public class WilayahDAO {
 		try {
 			transaksi = eManager.getTransaction();
 			transaksi.begin();
-			Wilayah exWilayah = (Wilayah) eManager.find(Wilayah.class,updatewilayah.getWilayahId());
-			exWilayah.setWilayahName(updatewilayah.getWilayahName());
-			exWilayah.setLevel(updatewilayah.getLevel());
-			exWilayah.setParentId(updatewilayah.getParentId());
+			Wilayah exWilayah = (Wilayah) eManager.find(Wilayah.class,updatewilayah.getWilayahid());
+			exWilayah.setWilayahname(updatewilayah.getWilayahname());
+			exWilayah.setWilayahlevel(updatewilayah.getWilayahlevel());
+			exWilayah.setWilayahparentid(updatewilayah.getWilayahparentid());
 			transaksi.commit();
 		} catch (Exception e) {
 			transaksi.rollback();

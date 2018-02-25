@@ -28,16 +28,16 @@
 		</thead>
 		<tbody>
 			<tr th:each="x : ${semuaUser}">
-				<td th:text="${x.userId}"> </td>
-				<td th:text="${x.lokasiId.lokasiId}"> </td>
-				<td th:text="${x.userKtp}"> </td>
-				<td th:text="${x.userName}"> </td>
-				<td th:text="${x.userEmail}"> </td>
-				<td th:text="${x.userPassword}"> </td>
-				<td th:text="${x.userPhone}"> </td>
+				<td th:text="${x.userid}"> </td>
+				<td th:text="${x.lokasiid.lokasiid}"> </td>
+				<td th:text="${x.userktp}"> </td>
+				<td th:text="${x.username}"> </td>
+				<td th:text="${x.usermail}"> </td>
+				<td th:text="${x.userpassword}"> </td>
+				<td th:text="${x.userphone}"> </td>
 				<td>
-					<a th:href="@{'/user/detail/' + ${x.userId}}">Detail</a>
-					<a th:href="@{'/user/edit/' + ${x.userId}}">Edit</a>
+					<a th:href="@{'/user/detail/' + ${x.userid}}">Detail</a>
+					<a th:href="@{'/user/edit/' + ${x.userid}}">Edit</a>
 					
 				</td>
 			</tr>

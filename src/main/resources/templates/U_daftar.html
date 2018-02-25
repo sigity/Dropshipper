@@ -47,17 +47,12 @@
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-	<script type="text/javascript">
-		// toggle password visibility
-		$('#password + .glyphicon').on('click', function() {
-		  $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open'); // toggle our classes for the eye icon
-		  $('#password').togglePassword(); // activate the hideShowPassword plugin
-		});
-	</script>
 	</head>
 	<body>
 		
@@ -105,38 +100,38 @@
 									<div class="tab-content">
 										<div class="tab-content-inner active" data-content="signup">
 											<h3>Daftar</h3>
-											<form th:action="@{/user_daftar}" th:object="${user}" method="post">
+											<form th:action="@{/daftar}" th:object="${user}" method="post">
 												<div class="row form-group">
 													<div class="col-md-12">
-														<label th:for="${user.userName}">Username</label>
-														<input type="text" class="form-control" th:field="*{userName}" />
+														<label th:for="${user.username}">Username</label>
+														<input type="text" class="form-control" th:field="*{username}" />
 													</div>
 												</div>
 
 												<div class="row form-group">
 													<div class="col-md-12">
-														<label th:for="${user.userEmail}">E-mail</label>
-														<input type="text" class="form-control" th:field="*{userEmail}" />														
+														<label th:for="${user.usermail}">E-mail</label>
+														<input type="text" class="form-control" th:field="*{usermail}" />														
+													</div>
+												</div>
+												
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label th:for="${user.userktp}">No. KTP</label>
+														<input type="text" class="form-control" th:field="*{userktp}" />														
 													</div>
 												</div>
 
 												<div class="row form-group">
 													<div class="col-md-12">
-														<label th:for="${user.userKtp}">No. KTP</label>
-														<input type="text" class="form-control" th:field="*{userKtp}" />														
-													</div>
-												</div>
-
-												<div class="row form-group">
-													<div class="col-md-12">
-														<label th:for="${user.userPhone}">Telepon</label>
-														<input type="text" class="form-control" th:field="*{userPhone}" />														
+														<label th:for="${user.userphone}">Telepon</label>
+														<input type="text" class="form-control" th:field="*{userphone}" />														
 													</div>
 												</div>
 												<div class="row form-group">
 													<div class="col-md-12">
-														<label th:for="${user.userPassword}">Password</label>
-														<input type="password" class="form-control" th:field="*{userPassword}" />																			
+														<label th:for="${user.userpassword}">Password</label>
+														<input type="password" class="form-control" th:field="*{userpassword}" />																			
 													</div>
 												</div>
 												<div class="row form-group">
@@ -152,9 +147,6 @@
 								</div>
 							</div>
 						</div>
-						<script type="text/javascript">
-							$("#password").password('toggle');
-						</script>
 					</div>
 							
 					
@@ -254,6 +246,7 @@
 
 	<!-- Main -->
 	<script src="js/main.js"></script>
-	</body>
+
+</body>
 </html>
 

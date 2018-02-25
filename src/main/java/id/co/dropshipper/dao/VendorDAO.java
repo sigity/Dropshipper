@@ -51,11 +51,11 @@ public class VendorDAO {
 		try {
 			transaksi = eManager.getTransaction();
 			transaksi.begin();
-			Vendor exVendor = (Vendor) eManager.find(Vendor.class,updatevendor.getVendorId());
-			exVendor.setVendorName(updatevendor.getVendorName());
-			exVendor.setVendorPhone(updatevendor.getVendorPhone());
-			exVendor.setVendorEmail(updatevendor.getVendorEmail());
-			exVendor.setLokasiId(updatevendor.getLokasiId());
+			Vendor exVendor = (Vendor) eManager.find(Vendor.class,updatevendor.getVendorid());
+			exVendor.setVendorname(updatevendor.getVendorname());
+			exVendor.setVendorphone(updatevendor.getVendorphone());
+			exVendor.setVendormail(updatevendor.getVendormail());
+			exVendor.setLokasiid(updatevendor.getLokasiid());
 			transaksi.commit();
 		} catch (Exception e) {
 			transaksi.rollback();

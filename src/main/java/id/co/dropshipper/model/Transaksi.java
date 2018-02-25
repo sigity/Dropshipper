@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,112 +23,100 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author userx
+ * @author Sigit Yudhianto
  */
 @Entity
 @Table(name = "transaksi")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Transaksi.findAll", query = "SELECT t FROM Transaksi t")
-    , @NamedQuery(name = "Transaksi.findByTransaksiId", query = "SELECT t FROM Transaksi t WHERE t.transaksiId = :transaksiId")
-    , @NamedQuery(name = "Transaksi.findByTransaksiTgl", query = "SELECT t FROM Transaksi t WHERE t.transaksiTgl = :transaksiTgl")
-    , @NamedQuery(name = "Transaksi.findByTglPengambilan", query = "SELECT t FROM Transaksi t WHERE t.tglPengambilan = :tglPengambilan")
-    , @NamedQuery(name = "Transaksi.findByBiayaKurir", query = "SELECT t FROM Transaksi t WHERE t.biayaKurir = :biayaKurir")
-    , @NamedQuery(name = "Transaksi.findByIsActive", query = "SELECT t FROM Transaksi t WHERE t.isActive = :isActive")})
+    , @NamedQuery(name = "Transaksi.findByTransaksiid", query = "SELECT t FROM Transaksi t WHERE t.transaksiid = :transaksiid")
+    , @NamedQuery(name = "Transaksi.findByTransaksitgl", query = "SELECT t FROM Transaksi t WHERE t.transaksitgl = :transaksitgl")
+    , @NamedQuery(name = "Transaksi.findByTglpengiriman", query = "SELECT t FROM Transaksi t WHERE t.tglpengiriman = :tglpengiriman")
+    , @NamedQuery(name = "Transaksi.findByIsactive", query = "SELECT t FROM Transaksi t WHERE t.isactive = :isactive")})
 public class Transaksi implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "TRANSAKSI_ID")
-    private Integer transaksiId;
-    @Column(name = "TRANSAKSI_TGL")
+    @Column(name = "TRANSAKSIID")
+    private Integer transaksiid;
+    @Column(name = "TRANSAKSITGL")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date transaksiTgl;
-    @Column(name = "TGL_PENGAMBILAN")
+    private Date transaksitgl;
+    @Column(name = "TGLPENGIRIMAN")
     @Temporal(TemporalType.DATE)
-    private Date tglPengambilan;
-    @Column(name = "BIAYA_KURIR")
-    private Integer biayaKurir;
-    @Column(name = "IS_ACTIVE")
-    private Integer isActive;
-    @JoinColumn(name = "WAKTU_ID", referencedColumnName = "WAKTU_ID")
+    private Date tglpengiriman;
+    @Column(name = "ISACTIVE")
+    private Integer isactive;
+    @JoinColumn(name = "WAKTUID", referencedColumnName = "WAKTUID")
     @ManyToOne(fetch = FetchType.LAZY)
-    private WaktuPengambilan waktuId;
-    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
+    private Waktupengambilan waktuid;
+    @JoinColumn(name = "USERID", referencedColumnName = "USERID")
     @ManyToOne(fetch = FetchType.LAZY)
-    private User userId;
-    @OneToMany(mappedBy = "transaksiId", fetch = FetchType.LAZY)
+    private User userid;
+    @OneToMany(mappedBy = "transaksiid", fetch = FetchType.LAZY)
     private List<Detailtransaksi> detailtransaksiList;
 
     public Transaksi() {
     }
 
-    public Transaksi(Integer transaksiId) {
-        this.transaksiId = transaksiId;
+    public Transaksi(Integer transaksiid) {
+        this.transaksiid = transaksiid;
     }
 
-    public Integer getTransaksiId() {
-        return transaksiId;
+    public Integer getTransaksiid() {
+        return transaksiid;
     }
 
-    public void setTransaksiId(Integer transaksiId) {
-        this.transaksiId = transaksiId;
+    public void setTransaksiid(Integer transaksiid) {
+        this.transaksiid = transaksiid;
     }
 
-    public Date getTransaksiTgl() {
-        return transaksiTgl;
+    public Date getTransaksitgl() {
+        return transaksitgl;
     }
 
-    public void setTransaksiTgl(Date transaksiTgl) {
-        this.transaksiTgl = transaksiTgl;
+    public void setTransaksitgl(Date transaksitgl) {
+        this.transaksitgl = transaksitgl;
     }
 
-    public Date getTglPengambilan() {
-        return tglPengambilan;
+    public Date getTglpengiriman() {
+        return tglpengiriman;
     }
 
-    public void setTglPengambilan(Date tglPengambilan) {
-        this.tglPengambilan = tglPengambilan;
+    public void setTglpengiriman(Date tglpengiriman) {
+        this.tglpengiriman = tglpengiriman;
     }
 
-    public Integer getBiayaKurir() {
-        return biayaKurir;
+    public Integer getIsactive() {
+        return isactive;
     }
 
-    public void setBiayaKurir(Integer biayaKurir) {
-        this.biayaKurir = biayaKurir;
+    public void setIsactive(Integer isactive) {
+        this.isactive = isactive;
     }
 
-    public Integer getIsActive() {
-        return isActive;
+    public Waktupengambilan getWaktuid() {
+        return waktuid;
     }
 
-    public void setIsActive(Integer isActive) {
-        this.isActive = isActive;
+    public void setWaktuid(Waktupengambilan waktuid) {
+        this.waktuid = waktuid;
     }
 
-    public WaktuPengambilan getWaktuId() {
-        return waktuId;
+    public User getUserid() {
+        return userid;
     }
 
-    public void setWaktuId(WaktuPengambilan waktuId) {
-        this.waktuId = waktuId;
-    }
-
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUserid(User userid) {
+        this.userid = userid;
     }
 
     @XmlTransient
@@ -141,7 +131,7 @@ public class Transaksi implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (transaksiId != null ? transaksiId.hashCode() : 0);
+        hash += (transaksiid != null ? transaksiid.hashCode() : 0);
         return hash;
     }
 
@@ -152,7 +142,7 @@ public class Transaksi implements Serializable {
             return false;
         }
         Transaksi other = (Transaksi) object;
-        if ((this.transaksiId == null && other.transaksiId != null) || (this.transaksiId != null && !this.transaksiId.equals(other.transaksiId))) {
+        if ((this.transaksiid == null && other.transaksiid != null) || (this.transaksiid != null && !this.transaksiid.equals(other.transaksiid))) {
             return false;
         }
         return true;
@@ -160,7 +150,7 @@ public class Transaksi implements Serializable {
 
     @Override
     public String toString() {
-        return "id.co.dropshipper.model.Transaksi[ transaksiId=" + transaksiId + " ]";
+        return "id.co.dropshipper.model.Transaksi[ transaksiid=" + transaksiid + " ]";
     }
     
 }

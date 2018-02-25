@@ -25,9 +25,9 @@ public class UserDAO {
 				.createQuery("from User")
 				.getResultList();
 	}
-	public User getUser(short id) {
+	public User getUser(String username) {
 		return (User) factory.createEntityManager()
-				.createQuery("from User where userId = " + id)
+				.createQuery("from User where username = '" + username +"'")
 				.getSingleResult();
 	}
 	
@@ -39,6 +39,7 @@ public class UserDAO {
 			
 			transaksi = eManager.getTransaction();
 			transaksi.begin();
+			user.setIsactive(1);
 			eManager.persist(user);
 			transaksi.commit();
 			
@@ -62,12 +63,12 @@ public class UserDAO {
 			transaksi = eManager.getTransaction();
 			transaksi.begin();
 			User existingUser =
-					(User) eManager.find(User.class, updatedUser.getUserId());
-			existingUser.setUserName(updatedUser.getUserName());
-			existingUser.setUserPassword(updatedUser.getUserPassword());
-			existingUser.setUserKtp(updatedUser.getUserKtp());
-			existingUser.setUserEmail(updatedUser.getUserEmail());
-			existingUser.setUserPhone(updatedUser.getUserPhone());
+					(User) eManager.find(User.class, updatedUser.getUserid());
+			existingUser.setUsername(updatedUser.getUsername());
+			existingUser.setUserpassword(updatedUser.getUserpassword());
+			existingUser.setUserktp(updatedUser.getUserktp());
+			existingUser.setUsermail(updatedUser.getUsermail());
+			existingUser.setUserphone(updatedUser.getUserphone());
 			transaksi.commit();
 			
 			

@@ -14,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,83 +26,77 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author userx
+ * @author Sigit Yudhianto
  */
 @Entity
 @Table(name = "kategori")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Kategori.findAll", query = "SELECT k FROM Kategori k")
-    , @NamedQuery(name = "Kategori.findByKategoriId", query = "SELECT k FROM Kategori k WHERE k.kategoriId = :kategoriId")
-    , @NamedQuery(name = "Kategori.findByKategoriName", query = "SELECT k FROM Kategori k WHERE k.kategoriName = :kategoriName")
-    , @NamedQuery(name = "Kategori.findByKategoriLevel", query = "SELECT k FROM Kategori k WHERE k.kategoriLevel = :kategoriLevel")
-    , @NamedQuery(name = "Kategori.findByKategoriParentId", query = "SELECT k FROM Kategori k WHERE k.kategoriParentId = :kategoriParentId")
-    , @NamedQuery(name = "Kategori.findByIsActive", query = "SELECT k FROM Kategori k WHERE k.isActive = :isActive")})
+    , @NamedQuery(name = "Kategori.findByKategoriid", query = "SELECT k FROM Kategori k WHERE k.kategoriid = :kategoriid")
+    , @NamedQuery(name = "Kategori.findByKategoriname", query = "SELECT k FROM Kategori k WHERE k.kategoriname = :kategoriname")
+    , @NamedQuery(name = "Kategori.findByKategorilevel", query = "SELECT k FROM Kategori k WHERE k.kategorilevel = :kategorilevel")
+    , @NamedQuery(name = "Kategori.findByIsactive", query = "SELECT k FROM Kategori k WHERE k.isactive = :isactive")})
 public class Kategori implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "KATEGORI_ID")
-    private Integer kategoriId;
-    @Size(max = 20)
-    @Column(name = "KATEGORI_NAME")
-    private String kategoriName;
-    @Column(name = "KATEGORI_LEVEL")
-    private Integer kategoriLevel;
-    @Column(name = "KATEGORI_PARENT_ID")
-    private Integer kategoriParentId;
-    @Column(name = "IS_ACTIVE")
-    private Integer isActive;
-    @OneToMany(mappedBy = "kategoriId", fetch = FetchType.LAZY)
+    @Column(name = "KATEGORIID")
+    private Integer kategoriid;
+    @Size(max = 30)
+    @Column(name = "KATEGORINAME")
+    private String kategoriname;
+    @Column(name = "KATEGORILEVEL")
+    private Integer kategorilevel;
+    @Column(name = "ISACTIVE")
+    private Integer isactive;
+    @OneToMany(mappedBy = "kategoriid", fetch = FetchType.LAZY)
     private List<Barang> barangList;
+    @OneToMany(mappedBy = "kategoriparentid", fetch = FetchType.LAZY)
+    private List<Kategori> kategoriList;
+    @JoinColumn(name = "KATEGORIPARENTID", referencedColumnName = "KATEGORIID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Kategori kategoriparentid;
 
     public Kategori() {
     }
 
-    public Kategori(Integer kategoriId) {
-        this.kategoriId = kategoriId;
+    public Kategori(Integer kategoriid) {
+        this.kategoriid = kategoriid;
     }
 
-    public Integer getKategoriId() {
-        return kategoriId;
+    public Integer getKategoriid() {
+        return kategoriid;
     }
 
-    public void setKategoriId(Integer kategoriId) {
-        this.kategoriId = kategoriId;
+    public void setKategoriid(Integer kategoriid) {
+        this.kategoriid = kategoriid;
     }
 
-    public String getKategoriName() {
-        return kategoriName;
+    public String getKategoriname() {
+        return kategoriname;
     }
 
-    public void setKategoriName(String kategoriName) {
-        this.kategoriName = kategoriName;
+    public void setKategoriname(String kategoriname) {
+        this.kategoriname = kategoriname;
     }
 
-    public Integer getKategoriLevel() {
-        return kategoriLevel;
+    public Integer getKategorilevel() {
+        return kategorilevel;
     }
 
-    public void setKategoriLevel(Integer kategoriLevel) {
-        this.kategoriLevel = kategoriLevel;
+    public void setKategorilevel(Integer kategorilevel) {
+        this.kategorilevel = kategorilevel;
     }
 
-    public Integer getKategoriParentId() {
-        return kategoriParentId;
+    public Integer getIsactive() {
+        return isactive;
     }
 
-    public void setKategoriParentId(Integer kategoriParentId) {
-        this.kategoriParentId = kategoriParentId;
-    }
-
-    public Integer getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Integer isActive) {
-        this.isActive = isActive;
+    public void setIsactive(Integer isactive) {
+        this.isactive = isactive;
     }
 
     @XmlTransient
@@ -112,10 +108,27 @@ public class Kategori implements Serializable {
         this.barangList = barangList;
     }
 
+    @XmlTransient
+    public List<Kategori> getKategoriList() {
+        return kategoriList;
+    }
+
+    public void setKategoriList(List<Kategori> kategoriList) {
+        this.kategoriList = kategoriList;
+    }
+
+    public Kategori getKategoriparentid() {
+        return kategoriparentid;
+    }
+
+    public void setKategoriparentid(Kategori kategoriparentid) {
+        this.kategoriparentid = kategoriparentid;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (kategoriId != null ? kategoriId.hashCode() : 0);
+        hash += (kategoriid != null ? kategoriid.hashCode() : 0);
         return hash;
     }
 
@@ -126,7 +139,7 @@ public class Kategori implements Serializable {
             return false;
         }
         Kategori other = (Kategori) object;
-        if ((this.kategoriId == null && other.kategoriId != null) || (this.kategoriId != null && !this.kategoriId.equals(other.kategoriId))) {
+        if ((this.kategoriid == null && other.kategoriid != null) || (this.kategoriid != null && !this.kategoriid.equals(other.kategoriid))) {
             return false;
         }
         return true;
@@ -134,7 +147,7 @@ public class Kategori implements Serializable {
 
     @Override
     public String toString() {
-        return "id.co.dropshipper.model.Kategori[ kategoriId=" + kategoriId + " ]";
+        return "id.co.dropshipper.model.Kategori[ kategoriid=" + kategoriid + " ]";
     }
     
 }

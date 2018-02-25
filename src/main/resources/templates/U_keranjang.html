@@ -56,16 +56,7 @@
 <!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-<script type="text/javascript">
-	// toggle password visibility
-	$('#password + .glyphicon').on(
-			'click',
-			function() {
-				$(this).toggleClass('glyphicon-eye-close').toggleClass(
-						'glyphicon-eye-open'); // toggle our classes for the eye icon
-				$('#password').togglePassword(); // activate the hideShowPassword plugin
-			});
-</script>
+
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -130,35 +121,11 @@
 
 											<div class="row form-group">
 												<div class="col-md-12">
-													<label for="fullname">Kategori :</label>
-													<p th:text="${y.kategoriid.kategoriname}"></p>
-												</div>
-											</div>
-											<div class="row form-group">
-												<div class="col-md-12">
 													<label for="fullname">SKU :</label>
 													<p th:text="${y.sku}"></p>
 												</div>
 											</div>
-											<div class="row form-group">
-												<div class="col-md-12">
-													<label for="fullname">Warna :</label>
-													<p th:text="${y.warna}"></p>
-												</div>
-											</div>
-
-											<div class="row form-group">
-												<div class="col-md-12">
-													<label for="fullname">Berat (gram) :</label>
-													<p th:text="${y.berat}"></p>
-												</div>
-											</div>
-											<div class="row form-group">
-												<div class="col-md-12">
-													<label for="fullname">Dimensi :</label>
-													<p th:text="${y.dimensi}"></p>
-												</div>
-											</div>
+											
 											<div class="row form-group">
 												<div class="col-md-12">
 													<label for="fullname">Harga (Rupiah) :</label>
@@ -167,17 +134,19 @@
 											</div>
 											<div class="row form-group">
 												<div class="col-md-12">
-													<label for="fullname">Keterangan Barang :</label>
-													<p th:text="${y.keterangan}"></p>
+													<label for="fullname">Jumlah :</label>
+													<input type="number" id="jumlah" th:value="${jumlahBarang}" min="0" oninput="validity.valid||(value='')" />
 												</div>
-											</div>											
+											</div>
+											
 											<div class="row form-group">
 												<div class="col-md-12">
 													<a th:href="@{/user/barang}"><button
-															class="btn btn-primary">Kembali</button></a> <a
-														th:href="@{'/tambahkeranjang/' + ${#authentication.name} + '/' + ${y.sku}}"><button
-															class="btn btn-primary">Tambah ke Keranjang</button></a>
-
+															class="btn btn-primary">Kembali</button></a>
+													<input type="hidden" id="userName" th:value="${#authentication.name}" />
+													<input type="hidden" id="sku" th:value="${y.sku}" /> 
+													<a id="linkButton" href="#"><button type="submit" onclick="aa()" class="btn btn-primary" >Tambah ke Keranjang</button></a>
+													
 												</div>
 											</div>
 
@@ -226,6 +195,20 @@
 
 	<!-- Main -->
 	<script src="../../js/main.js"></script>
+	<script type="text/javascript">
+
+		function aa(){
+			var val1 = document.getElementById("userName");
+			var val2 = document.getElementById("sku");
+			var val3 = document.getElementById("jumlah");
+			var user = val1.value;
+			var sku = val2.value;
+			var x = val3.value;
+			var jumlah = x.replace(/^0+/, '');
+		    document.getElementById("linkButton").href = "/tambahkeranjang/" + user + "/" + sku + "/" + jumlah;
+		}
+	
+	</script>
 </body>
 </html>
 

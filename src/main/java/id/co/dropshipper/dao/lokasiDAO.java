@@ -49,13 +49,13 @@ public class lokasiDAO {
 		try {
 			transaksi = eManager.getTransaction();
 			transaksi.begin();
-			Lokasi exLokasi = (Lokasi) eManager.find(Lokasi.class, updateloka.getLokasiId());
-			exLokasi.setAlamat(updateloka.getAlamat());
+			Lokasi exLokasi = (Lokasi) eManager.find(Lokasi.class, updateloka.getLokasiid());
+			exLokasi.setAlamatlengkap(updateloka.getAlamatlengkap());
 			exLokasi.setKodepos(updateloka.getKodepos());
 			exLokasi.setUserList(updateloka.getUserList());
 			exLokasi.setVendorList(updateloka.getVendorList());
-			exLokasi.setWilayahId(updateloka.getWilayahId());
-			exLokasi.setIsActive(updateloka.getIsActive());
+			exLokasi.setWilayahid(updateloka.getWilayahid());
+			exLokasi.setIsactive(updateloka.getIsactive());
 
 		} catch (Exception e) {
 			transaksi.rollback();

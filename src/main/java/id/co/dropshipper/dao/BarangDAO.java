@@ -76,15 +76,15 @@ public class BarangDAO {
 		try {
 			transaksi = eManager.getTransaction();
 			transaksi.begin();
-			Barang exBarang= (Barang) eManager.find(Barang.class, updatebarang.getBarangId());
-			exBarang.setKategoriId(updatebarang.getKategoriId());
-			exBarang.setVendorId(updatebarang.getVendorId());
+			Barang exBarang= (Barang) eManager.find(Barang.class, updatebarang.getBarangid());
+			exBarang.setKategoriid(updatebarang.getKategoriid());
+			exBarang.setVendorid(updatebarang.getVendorid());
 			exBarang.setSku(updatebarang.getSku());
-			exBarang.setBarangName(updatebarang.getBarangName());
+			exBarang.setBarangname(updatebarang.getBarangname());
 			exBarang.setWarna(updatebarang.getWarna());
-			exBarang.setBarangBerat(updatebarang.getBarangBerat());
-			exBarang.setBarangPrice(updatebarang.getBarangPrice());
-			exBarang.setIsActive(updatebarang.getIsActive());
+			exBarang.setBerat(updatebarang.getBerat());
+			exBarang.setHarga(updatebarang.getHarga());
+			exBarang.setIsactive(updatebarang.getIsactive());
 			transaksi.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

@@ -22,9 +22,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/login", "/user_daftar", "/awal", "/css/**", "/js/**", "/fonts/**", "/images/**", "/sass/**").permitAll().anyRequest().authenticated()
-				.and().formLogin().defaultSuccessUrl("/user_barang", true).loginPage("/login").permitAll().and()
-				.logout().permitAll();
+		http.csrf().disable()
+			.authorizeRequests()
+			.antMatchers("/contoh", "/munculkan", "/", "/login", "/daftar", "/awal", "/css/**", "/js/**", "/fonts/**", "/images/**", "/sass/**")
+			.permitAll()
+			.antMatchers("/awal").hasAnyRole("ADMIN")
+            .antMatchers("/user/**").hasAnyRole("USER")
+			.anyRequest()
+			.authenticated()
+			.and()
+			.formLogin()
+			.defaultSuccessUrl("/default", true)
+			.loginPage("/login")
+			.permitAll()
+			.and()
+			.logout()
+			.permitAll();
 	}
 
 	@Autowired
@@ -34,7 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.createQuery("from User")
 				.getResultList();
 		for (User user : listUser) {
-			auth.inMemoryAuthentication().withUser(user.getUserName()).password(user.getUserPassword()).roles("USER");
+			auth.inMemoryAuthentication().withUser(user.getUsername()).password(user.getUserpassword()).roles("USER")
+			.and().withUser("pradnya").password("111").roles("ADMIN");
 		}
 	}
 }

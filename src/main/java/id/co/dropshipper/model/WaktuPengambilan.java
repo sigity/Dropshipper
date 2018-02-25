@@ -26,61 +26,72 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author userx
+ * @author Sigit Yudhianto
  */
 @Entity
-@Table(name = "waktu_pengambilan")
+@Table(name = "waktupengambilan")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "WaktuPengambilan.findAll", query = "SELECT w FROM WaktuPengambilan w")
-    , @NamedQuery(name = "WaktuPengambilan.findByWaktuId", query = "SELECT w FROM WaktuPengambilan w WHERE w.waktuId = :waktuId")
-    , @NamedQuery(name = "WaktuPengambilan.findByWaktuPengambilan", query = "SELECT w FROM WaktuPengambilan w WHERE w.waktuPengambilan = :waktuPengambilan")
-    , @NamedQuery(name = "WaktuPengambilan.findByIsActive", query = "SELECT w FROM WaktuPengambilan w WHERE w.isActive = :isActive")})
-public class WaktuPengambilan implements Serializable {
+    @NamedQuery(name = "Waktupengambilan.findAll", query = "SELECT w FROM Waktupengambilan w")
+    , @NamedQuery(name = "Waktupengambilan.findByWaktuid", query = "SELECT w FROM Waktupengambilan w WHERE w.waktuid = :waktuid")
+    , @NamedQuery(name = "Waktupengambilan.findByWaktupengambilan", query = "SELECT w FROM Waktupengambilan w WHERE w.waktupengambilan = :waktupengambilan")
+    , @NamedQuery(name = "Waktupengambilan.findByIsactive", query = "SELECT w FROM Waktupengambilan w WHERE w.isactive = :isactive")})
+public class Waktupengambilan implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "WAKTU_ID")
-    private Integer waktuId;
-    @Column(name = "WAKTU_PENGAMBILAN")
+    @Column(name = "WAKTUID")
+    private Integer waktuid;
+    @Column(name = "WAKTUPENGAMBILAN")
     @Temporal(TemporalType.TIME)
-    private Date waktuPengambilan;
-    @Column(name = "IS_ACTIVE")
-    private Integer isActive;
-    @OneToMany(mappedBy = "waktuId", fetch = FetchType.LAZY)
+    private Date waktupengambilan;
+    @Column(name = "ISACTIVE")
+    private Integer isactive;
+    @OneToMany(mappedBy = "waktuid", fetch = FetchType.LAZY)
+    private List<Pengambilan> pengambilanList;
+    @OneToMany(mappedBy = "waktuid", fetch = FetchType.LAZY)
     private List<Transaksi> transaksiList;
 
-    public WaktuPengambilan() {
+    public Waktupengambilan() {
     }
 
-    public WaktuPengambilan(Integer waktuId) {
-        this.waktuId = waktuId;
+    public Waktupengambilan(Integer waktuid) {
+        this.waktuid = waktuid;
     }
 
-    public Integer getWaktuId() {
-        return waktuId;
+    public Integer getWaktuid() {
+        return waktuid;
     }
 
-    public void setWaktuId(Integer waktuId) {
-        this.waktuId = waktuId;
+    public void setWaktuid(Integer waktuid) {
+        this.waktuid = waktuid;
     }
 
-    public Date getWaktuPengambilan() {
-        return waktuPengambilan;
+    public Date getWaktupengambilan() {
+        return waktupengambilan;
     }
 
-    public void setWaktuPengambilan(Date waktuPengambilan) {
-        this.waktuPengambilan = waktuPengambilan;
+    public void setWaktupengambilan(Date waktupengambilan) {
+        this.waktupengambilan = waktupengambilan;
     }
 
-    public Integer getIsActive() {
-        return isActive;
+    public Integer getIsactive() {
+        return isactive;
     }
 
-    public void setIsActive(Integer isActive) {
-        this.isActive = isActive;
+    public void setIsactive(Integer isactive) {
+        this.isactive = isactive;
+    }
+
+    @XmlTransient
+    public List<Pengambilan> getPengambilanList() {
+        return pengambilanList;
+    }
+
+    public void setPengambilanList(List<Pengambilan> pengambilanList) {
+        this.pengambilanList = pengambilanList;
     }
 
     @XmlTransient
@@ -95,18 +106,18 @@ public class WaktuPengambilan implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (waktuId != null ? waktuId.hashCode() : 0);
+        hash += (waktuid != null ? waktuid.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof WaktuPengambilan)) {
+        if (!(object instanceof Waktupengambilan)) {
             return false;
         }
-        WaktuPengambilan other = (WaktuPengambilan) object;
-        if ((this.waktuId == null && other.waktuId != null) || (this.waktuId != null && !this.waktuId.equals(other.waktuId))) {
+        Waktupengambilan other = (Waktupengambilan) object;
+        if ((this.waktuid == null && other.waktuid != null) || (this.waktuid != null && !this.waktuid.equals(other.waktuid))) {
             return false;
         }
         return true;
@@ -114,7 +125,7 @@ public class WaktuPengambilan implements Serializable {
 
     @Override
     public String toString() {
-        return "id.co.dropshipper.model.WaktuPengambilan[ waktuId=" + waktuId + " ]";
+        return "id.co.dropshipper.model.Waktupengambilan[ waktuid=" + waktuid + " ]";
     }
     
 }

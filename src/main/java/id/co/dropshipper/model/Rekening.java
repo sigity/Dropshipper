@@ -23,76 +23,87 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author userx
+ * @author Sigit Yudhianto
  */
 @Entity
 @Table(name = "rekening")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Rekening.findAll", query = "SELECT r FROM Rekening r")
-    , @NamedQuery(name = "Rekening.findByRekeningId", query = "SELECT r FROM Rekening r WHERE r.rekeningId = :rekeningId")
-    , @NamedQuery(name = "Rekening.findByRekeningName", query = "SELECT r FROM Rekening r WHERE r.rekeningName = :rekeningName")})
+    , @NamedQuery(name = "Rekening.findByRekeningid", query = "SELECT r FROM Rekening r WHERE r.rekeningid = :rekeningid")
+    , @NamedQuery(name = "Rekening.findByRekeningnumber", query = "SELECT r FROM Rekening r WHERE r.rekeningnumber = :rekeningnumber")
+    , @NamedQuery(name = "Rekening.findByRekeningname", query = "SELECT r FROM Rekening r WHERE r.rekeningname = :rekeningname")})
 public class Rekening implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "REKENING_ID")
-    private Integer rekeningId;
+    @Column(name = "REKENINGID")
+    private Integer rekeningid;
+    @Column(name = "REKENINGNUMBER")
+    private Integer rekeningnumber;
     @Size(max = 30)
-    @Column(name = "REKENING_NAME")
-    private String rekeningName;
-    @JoinColumn(name = "BANK_ID", referencedColumnName = "BANK_ID")
+    @Column(name = "REKENINGNAME")
+    private String rekeningname;
+    @JoinColumn(name = "BANKID", referencedColumnName = "BANKID")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Bank bankId;
-    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
+    private Bank bankid;
+    @JoinColumn(name = "USERID", referencedColumnName = "USERID")
     @ManyToOne(fetch = FetchType.LAZY)
-    private User userId;
+    private User userid;
 
     public Rekening() {
     }
 
-    public Rekening(Integer rekeningId) {
-        this.rekeningId = rekeningId;
+    public Rekening(Integer rekeningid) {
+        this.rekeningid = rekeningid;
     }
 
-    public Integer getRekeningId() {
-        return rekeningId;
+    public Integer getRekeningid() {
+        return rekeningid;
     }
 
-    public void setRekeningId(Integer rekeningId) {
-        this.rekeningId = rekeningId;
+    public void setRekeningid(Integer rekeningid) {
+        this.rekeningid = rekeningid;
     }
 
-    public String getRekeningName() {
-        return rekeningName;
+    public Integer getRekeningnumber() {
+        return rekeningnumber;
     }
 
-    public void setRekeningName(String rekeningName) {
-        this.rekeningName = rekeningName;
+    public void setRekeningnumber(Integer rekeningnumber) {
+        this.rekeningnumber = rekeningnumber;
     }
 
-    public Bank getBankId() {
-        return bankId;
+    public String getRekeningname() {
+        return rekeningname;
     }
 
-    public void setBankId(Bank bankId) {
-        this.bankId = bankId;
+    public void setRekeningname(String rekeningname) {
+        this.rekeningname = rekeningname;
     }
 
-    public User getUserId() {
-        return userId;
+    public Bank getBankid() {
+        return bankid;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setBankid(Bank bankid) {
+        this.bankid = bankid;
+    }
+
+    public User getUserid() {
+        return userid;
+    }
+
+    public void setUserid(User userid) {
+        this.userid = userid;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (rekeningId != null ? rekeningId.hashCode() : 0);
+        hash += (rekeningid != null ? rekeningid.hashCode() : 0);
         return hash;
     }
 
@@ -103,7 +114,7 @@ public class Rekening implements Serializable {
             return false;
         }
         Rekening other = (Rekening) object;
-        if ((this.rekeningId == null && other.rekeningId != null) || (this.rekeningId != null && !this.rekeningId.equals(other.rekeningId))) {
+        if ((this.rekeningid == null && other.rekeningid != null) || (this.rekeningid != null && !this.rekeningid.equals(other.rekeningid))) {
             return false;
         }
         return true;
@@ -111,7 +122,7 @@ public class Rekening implements Serializable {
 
     @Override
     public String toString() {
-        return "id.co.dropshipper.model.Rekening[ rekeningId=" + rekeningId + " ]";
+        return "id.co.dropshipper.model.Rekening[ rekeningid=" + rekeningid + " ]";
     }
     
 }

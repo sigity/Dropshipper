@@ -50,11 +50,11 @@ public boolean updateKat(Kategori updatekateg) {
 	try {
 		transaksi = eManager.getTransaction();
 		transaksi.begin();
-		Kategori exKategori = (Kategori) eManager.find(Kategori.class,updatekateg.getKategoriId());
-		exKategori.setKategoriName(updatekateg.getKategoriName());
-		exKategori.setKategoriLevel(updatekateg.getKategoriLevel());
-		exKategori.setKategoriParentId(updatekateg.getKategoriParentId());
-		exKategori.setIsActive(updatekateg.getIsActive());
+		Kategori exKategori = (Kategori) eManager.find(Kategori.class,updatekateg.getKategoriid());
+		exKategori.setKategoriname(updatekateg.getKategoriname());
+		exKategori.setKategorilevel(updatekateg.getKategorilevel());
+		exKategori.setKategoriparentid(updatekateg.getKategoriparentid());
+		exKategori.setIsactive(updatekateg.getIsactive());
 
 	} catch (Exception e) {
 		transaksi.rollback();
