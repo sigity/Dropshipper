@@ -1,6 +1,7 @@
 package id.co.dropshipper.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -88,8 +89,13 @@ public class UserDAO {
 	}
 	public List<Barang> getAllBarangCari(String nama){
 		return factory.createEntityManager()
-				.createQuery("from Barang where barangName like '%" + nama + "%'")
+				.createQuery("from Barang where barangname like '%" + nama + "%'")
 				.getResultList();
+	}
+	public Barang getBarangBySKU(String key){
+		return (Barang) factory.createEntityManager()
+				.createQuery("from Barang where sku = '" + key + "'")
+				.getSingleResult();
 	}
 	public List<Vendor> getAllVendor(){
 		return factory.createEntityManager()
@@ -98,7 +104,7 @@ public class UserDAO {
 	}
 	public Vendor getVendor(short id) {
 		return (Vendor) factory.createEntityManager()
-				.createQuery("from Vendor where vendorId = " + id)
+				.createQuery("from Vendor where vendorid = " + id)
 				.getSingleResult();
 	}
 	public List<Kategori> getAllKategori(){

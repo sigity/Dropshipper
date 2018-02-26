@@ -9,7 +9,7 @@
  $(document).ready(function(){
   $.get("/munculkan", function(data){
 	  $.each( data, function( key, value ) {
-		  alert( key + ": " + value );
+		  alert( key);
 		});
 	});
   $("input:last").css("background-color","gold");

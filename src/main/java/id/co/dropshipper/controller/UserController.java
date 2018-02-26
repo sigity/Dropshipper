@@ -1,7 +1,11 @@
 package id.co.dropshipper.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import id.co.dropshipper.dao.UserDAO;
+import id.co.dropshipper.model.Barang;
 import id.co.dropshipper.model.User;
 
 @Controller
@@ -92,10 +97,18 @@ public class UserController {
 		return "U_keranjang";
 	}
 	
-	@GetMapping("/transaksi")
+	@GetMapping("/transaksi") 
 	public String transaksi(Model model, Principal principal) {
 		String name = principal.getName();
-		Map<Object, Object> jumlah = stringRedisTemplate.opsForHash().entries("keranjang-" + name);
+		//Map<Object, Object> jumlah = stringRedisTemplate.opsForHash().entries("keranjang-" + name);
+		Set<Object> key = stringRedisTemplate.opsForHash().keys("keranjang-" + name);
+		Iterator iterator = key.iterator();
+		List<Barang> KeySKU = new ArrayList<Barang>();
+		while (iterator.hasNext()) {
+			KeySKU.add(userDAO.getBarangBySKU(iterator.next().toString()));
+		}
+		model.addAttribute("semuaBarang", KeySKU);
+
 		
 		return "U_transaksi";
 	}

@@ -105,7 +105,7 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a th:href="@{'/user/pengaturan/' + ${#authentication.name}}">Pengaturan akun</a></li>
-								<li><a href="#">Transaksi</a></li>
+								<li><a th:href="@{/user/transaksi}">Transaksi</a></li>
 								<li role="separator" class="divider"></li>
 								<li>
 									<form th:action="@{'/logout/' + ${#authentication.name}}" method="post">
@@ -164,7 +164,7 @@
 						</figure>
 					</div>
 						<div>
-							<h2 id="namaModal"></h2>
+							<h2></h2>
 						</div>
 						<div>
 							<label id="hargaModal"></label>

@@ -45,17 +45,23 @@ public class SearchAPI {
 		response.sendRedirect("/user/barang");
 	}
 	
+	@GetMapping("/hapuskeranjang/{nama}/{sku}")
+	public void setHapusKeranjang(HttpServletResponse response,@PathVariable("nama") String nama, @PathVariable("sku") String sku) throws IOException {
+		stringRedisTemplate.opsForHash().delete("keranjang-" + nama, sku);
+		response.sendRedirect("/user/transaksi");
+	}
+	
 	@GetMapping("/munculkan/{nama}/{sku}")
 	public Object getKeranjang(@PathVariable("nama") String nama, @PathVariable("sku") String sku){
-		//return stringRedisTemplate.opsForHash().entries("keranjang2-ani");
 		String key = "keranjang-" + nama;
 		return stringRedisTemplate.opsForHash().get(key, sku);
 	}
 	
 	@GetMapping("/munculkan/{nama}")
-	public Object getKeranjang2(@PathVariable("nama") String nama){
-		String key = "keranjang-" + nama;
-		return stringRedisTemplate.opsForHash().entries(key);
+	public Set<Object> getKeranjang2(@PathVariable("nama") String nama){
+		//String key = "keranjang-" + nama;
+		Set<Object> key = stringRedisTemplate.opsForHash().keys("keranjang-" + nama);
+		return key;
 	}
 	
 	@GetMapping ("/kategoriname")
