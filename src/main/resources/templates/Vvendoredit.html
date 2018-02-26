@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>	
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+  $("table").dataTable();
+  $.get("/kategori",function(data){
+		$("#kategoriinput").autocomplete({
+			source:data
+		});
+	});
+  $("#kategoriinput").change(function(){
+	  
+  });
+ });
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="#" th:action="@{/admin/editvendor}" th:object="${objeditvendor}" method="post">
+		<div>
+			<label th:for="${objeditvendor.vendorname}"> name</label>
+			<input type="text" th:field="*{vendorname}" th:errorclass="fieldError" />
+			<p th:if="${#fields.hasErrors('vendorname')}"  th:errors="*{vendorName}"> SKU</p>
+		</div>
+		<div>
+			<label th:for="${objeditvendor.vendorphone}"> phone</label>
+			<input type="text" th:field="*{vendorphone}" th:errorclass="fieldError" />
+			<p th:if="${#fields.hasErrors('vendorphone')}"  th:errors="*{vendorphone}"> barangName</p>
+		</div>
+		<div>
+			<label th:for="${objeditvendor.vendormail}">Email</label>
+			<input type="text" th:field="*{vendormail}" th:errorclass="fieldError" />
+			<p th:if="${#fields.hasErrors('vendormail')}"  th:errors="*{vendormmail}"> warna</p>
+		</div>
+		<div>
+			<label th:for="${objeditvendor.lokasiid}"> lokasiId</label>
+			<input type="text" th:field="*{lokasiid.lokasiid}" th:errorclass="fieldError" />
+			<p th:if="${#fields.hasErrors('lokasiid')}"  th:errors="*{lokasiid}"> barangPrice</p>
+		</div>
+
+
+		<div>
+			<input type="submit" value="Simpan yahhhhh" />
+			<input type="hidden" th:field="*{vendorid}" th:value="*{vendorid}" />
+		</div>
+	</form>
+</body>
+</html>
