@@ -2,6 +2,7 @@ package id.co.dropshipper.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -100,14 +101,20 @@ public class UserController {
 	@GetMapping("/transaksi") 
 	public String transaksi(Model model, Principal principal) {
 		String name = principal.getName();
-		//Map<Object, Object> jumlah = stringRedisTemplate.opsForHash().entries("keranjang-" + name);
-		Set<Object> key = stringRedisTemplate.opsForHash().keys("keranjang-" + name);
-		Iterator iterator = key.iterator();
-		List<Barang> KeySKU = new ArrayList<Barang>();
-		while (iterator.hasNext()) {
-			KeySKU.add(userDAO.getBarangBySKU(iterator.next().toString()));
+		Map<Object, Object> jumlah = stringRedisTemplate.opsForHash().entries("keranjang-" + name);
+//		Set<Object> key = stringRedisTemplate.opsForHash().keys("keranjang-" + name);
+//		List<Object> value = stringRedisTemplate.opsForHash().values("keranjang-" + name);
+//		Iterator iterator = key.iterator();
+//		List<Barang> KeySKU = new ArrayList<Barang>();
+//		while (iterator.hasNext()) {
+//			KeySKU.add(userDAO.getBarangBySKU(iterator.next().toString()));
+//		}
+		Map<Barang, Object> mapTrans = new HashMap<Barang, Object>();
+		for(Object keySKU : jumlah.keySet()) {
+			mapTrans.put(userDAO.getBarangBySKU(keySKU.toString()), jumlah.get(keySKU));
 		}
-		model.addAttribute("semuaBarang", KeySKU);
+//		model.addAttribute("semuaBarang", KeySKU);
+		model.addAttribute("valueBarang", mapTrans);
 
 		
 		return "U_transaksi";

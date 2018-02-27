@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import id.co.dropshipper.model.Barang;
 import id.co.dropshipper.model.Kategori;
 
 @RestController
@@ -58,9 +59,18 @@ public class SearchAPI {
 	}
 	
 	@GetMapping("/munculkan/{nama}")
-	public Set<Object> getKeranjang2(@PathVariable("nama") String nama){
+	public List<Object> getKeranjang2(@PathVariable("nama") String nama){
 		//String key = "keranjang-" + nama;
-		Set<Object> key = stringRedisTemplate.opsForHash().keys("keranjang-" + nama);
+		//Set<Object> key = stringRedisTemplate.opsForHash().keys("keranjang-" + nama);
+		String value="";
+		Map<Object, Object> jumlah = stringRedisTemplate.opsForHash().entries("keranjang-" + nama);
+//		List<String> valueBarang = new ArrayList<String>();
+		for(Object valueJumlah : jumlah.keySet()) {
+			
+//            valueBarang.add(jumlah.get(valueJumlah).toString());
+		}
+		List<Object> key = stringRedisTemplate.opsForHash().values("keranjang-" + nama);
+		System.out.println(jumlah);
 		return key;
 	}
 	

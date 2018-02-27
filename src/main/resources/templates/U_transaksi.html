@@ -139,25 +139,27 @@
 													<th>SKU</th>
 													<th>Vendor</th>
 													<th>Harga</th>
+													<th>Jumlah Barang</th>
 													<th>Details</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr th:each="x : ${semuaBarang}">
-													<td th:text="${x.barangname}"></td>
-													<td th:text="${x.sku}"></td>
-													<td th:text="${x.vendorid.vendorname}"></td>
-													<td th:text="'Rp. '+${x.harga}"></td>
+												<tr th:each="x : ${valueBarang}">
+													<td th:text="${x.key.barangname}"></td>
+													<td th:text="${x.key.sku}"></td>
+													<td th:text="${x.key.vendorid.vendorname}"></td>
+													<td th:text="'Rp. '+${x.key.harga}"></td>
+													<td th:text="${x.value}"></td>
 													<td>
-														<a th:href="@{'/user/detailbarang/' + ${x.barangid}}"> Detail </a>
-														<a th:href="@{'/user/keranjang/' + ${x.barangid}}">| Tambah |</a>
-														<a th:href="@{'/hapuskeranjang/' + ${#authentication.name} + '/' + ${x.sku}}"> Hapus </a>
+														<a th:href="@{'/user/detailbarang/' + ${x.key.barangid}}"> Detail </a>
+														<a th:href="@{'/user/keranjang/' + ${x.key.barangid}}">| Tambah |</a>
+														<a th:href="@{'/hapuskeranjang/' + ${#authentication.name} + '/' + ${x.key.sku}}"> Hapus </a>
 													</td>
 												</tr>
 											</tbody>
 										</table>
 										<a th:href="@{/user/barang}"><button class="btn btn-primary">Cari Barang</button></a>
-
+										
 									</div>
 								</div>
 							</div>
