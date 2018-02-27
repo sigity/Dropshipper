@@ -150,7 +150,7 @@
 													<td th:text="${x.key.vendorid.vendorname}"></td>
 													<td th:text="'Rp. '+${x.key.harga}"></td>
 													<td th:text="${x.value}"></td>
-													<td>
+													<td> 
 														<a th:href="@{'/user/detailbarang/' + ${x.key.barangid}}"> Detail </a>
 														<a th:href="@{'/user/keranjang/' + ${x.key.barangid}}">| Tambah |</a>
 														<a th:href="@{'/hapuskeranjang/' + ${#authentication.name} + '/' + ${x.key.sku}}"> Hapus </a>
