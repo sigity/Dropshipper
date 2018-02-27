@@ -108,9 +108,8 @@
 								<li><a th:href="@{/user/transaksi}">Transaksi</a></li>
 								<li role="separator" class="divider"></li>
 								<li>
-									<form th:action="@{'/logout/' + ${#authentication.name}}" method="post">
-							            <input type="submit" class="btn btn-primary col-md-12" value="Keluar"/>
-							        </form>
+									
+							        <a th:href="@{'/logout/' + ${#authentication.name}}">Keluar</a>
 							    </li>
 							</ul>
 						</li>

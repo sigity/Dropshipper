@@ -50,15 +50,22 @@
 <link rel="stylesheet" href="../../css/style.css" />
 
 
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	crossorigin="anonymous"></script>
 <script
-			  src="https://code.jquery.com/jquery-2.2.4.min.js"
-			  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-			  crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
 
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 
 <!-- Modernizr JS -->
 <script src="../../js/modernizr-2.6.2.min.js"></script>
@@ -67,7 +74,7 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$("table").datatable();
 	});
 </script>
@@ -150,16 +157,27 @@
 													<td th:text="${x.key.vendorid.vendorname}"></td>
 													<td th:text="'Rp. '+${x.key.harga}"></td>
 													<td th:text="${x.value}"></td>
-													<td> 
-														<a th:href="@{'/user/detailbarang/' + ${x.key.barangid}}"> Detail </a>
-														<a th:href="@{'/user/keranjang/' + ${x.key.barangid}}">| Tambah |</a>
-														<a th:href="@{'/hapuskeranjang/' + ${#authentication.name} + '/' + ${x.key.sku}}"> Hapus </a>
-													</td>
+													<td><a
+														th:href="@{'/user/detailbarang/' + ${x.key.barangid}}">
+															Detail </a> <a
+														th:href="@{'/user/keranjang/' + ${x.key.barangid}}">|
+															Tambah |</a> <a
+														th:href="@{'/hapuskeranjang/' + ${#authentication.name} + '/' + ${x.key.sku}}">
+															Hapus </a></td>
 												</tr>
 											</tbody>
 										</table>
-										<a th:href="@{/user/barang}"><button class="btn btn-primary">Cari Barang</button></a>
-										
+										<div class="form-group">
+									      <label for="sel1">Select Kurir (select one):</label>
+									      <select class="form-control" id="sel1">
+									        <option th:each="k : ${semuaKurir}" th:value="${k.kuririd}" th:text="${k.kurirname}"></option>
+									        
+									      </select>
+									    </div>
+									     
+										<a th:href="@{/user/barang}"><button
+												class="btn btn-primary">Cari Barang</button></a>
+
 									</div>
 								</div>
 							</div>

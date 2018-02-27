@@ -251,10 +251,10 @@ public class AdminController {
 	public String editlokasi(@Valid Lokasi lokasi,
 			BindingResult result) {
 		if(!result.hasErrors() && lokasiDAO.updateLok(lokasi)) {
-			return "redirect:/lokasi"; //mapping
+			return "redirect:/admin/lokasi"; //mapping
 			
 		}else {
-			return "editlokasi"; //mapping
+			return "Veditlokasi"; //mapping
 		}
 	}
 	

@@ -1,5 +1,8 @@
 package id.co.dropshipper.controller;
 
-public class KurirController {
+import org.springframework.stereotype.Controller;
 
+@Controller
+public class KurirController {
+	
 }

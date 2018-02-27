@@ -53,12 +53,12 @@ public class DefaultController {
 	@RequestMapping("/default")
     public String defaultAfterLogin(HttpServletRequest request) {
         if (request.isUserInRole("ROLE_ADMIN")) {
-            return "redirect:/admin/barang";
+            return "redirect:/admin/dashboard";
         }
         return "redirect:/user/barang";
     }
 	
-	@PostMapping(value="/logout/{nama}")
+	@GetMapping(value="/logout/{nama}")
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response, @PathVariable("nama") String nama) {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    stringRedisTemplate.delete("keranjang-" + nama);

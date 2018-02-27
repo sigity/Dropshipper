@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import id.co.dropshipper.dao.KurirDAO;
 import id.co.dropshipper.dao.UserDAO;
 import id.co.dropshipper.model.Barang;
 import id.co.dropshipper.model.User;
@@ -33,6 +34,8 @@ public class UserController {
 
 	@Autowired
 	private UserDAO userDAO;
+	@Autowired
+	private KurirDAO kurirDAO;
 	
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
@@ -109,11 +112,12 @@ public class UserController {
 //		while (iterator.hasNext()) {
 //			KeySKU.add(userDAO.getBarangBySKU(iterator.next().toString()));
 //		}
+//		model.addAttribute("semuaBarang", KeySKU);
 		Map<Barang, Object> mapTrans = new HashMap<Barang, Object>();
 		for(Object keySKU : jumlah.keySet()) {
 			mapTrans.put(userDAO.getBarangBySKU(keySKU.toString()), jumlah.get(keySKU));
 		}
-//		model.addAttribute("semuaBarang", KeySKU);
+		model.addAttribute("semuaKurir", kurirDAO.index());
 		model.addAttribute("valueBarang", mapTrans);
 
 		
